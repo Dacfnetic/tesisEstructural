@@ -119,9 +119,10 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
         gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
         gl.glUniform1i(oLoc, 0);
         
-      	ControladorDePlanos.drawPlanes(gl, vbo, checkerBoardTexture);
+        Controlador.dibujar("v",gl, vbo, 0, brickTexture,ControladorDeMuros.muros, 36);
+        Controlador.dibujar("v",gl, vbo, 1, brickTexture,ControladorDePlanos.planos, 6);
+        Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture,ControladorDePlanos.planos, 6);
         
-        ControladorDeMuros.dibujarMuros(gl, vbo, brickTexture);
         ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
     }
     

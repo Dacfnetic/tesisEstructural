@@ -1,10 +1,11 @@
 package components;
 
 import java.awt.event.MouseEvent;
+import rendering.Controlador;
 import rendering.Planta;
 
 //@author diego
-public abstract class ControladorDeEscena {
+public abstract class ControladorDeEscena extends Controlador{
     
     public static float left, right, top, bottom;
     public static boolean drawSnap = false;
@@ -20,9 +21,8 @@ public abstract class ControladorDeEscena {
     
     public static void moverMouseEnPlanta(Planta planta, MouseEvent e){     
         calcularCoordenadasGlobalesEnPlanta(planta, e);   
-        ControladorDeMuros.comprobarAnclaje();
+        //ControladorDeMuros.comprobarAnclaje();
         ControladorDeMuros.dibujarMuroTemporal();
-        
     }
     
     public static void calcularCoordenadasGlobalesEnPlanta(Planta planta, MouseEvent e){

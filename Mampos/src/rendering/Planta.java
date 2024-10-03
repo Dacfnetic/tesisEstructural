@@ -66,6 +66,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         //TODO: crear funcion para cargar texturas
     	brickTexture = mampos.Utils.loadTexture("textures/brick/Poliigon_BrickReclaimedRunning_7787_BaseColor.jpg");
         checkerBoardTexture = mampos.Utils.loadTexture("textures/ground/GroundWoodChips001_COL_2K.jpg");
+        
         // 003. Se generan los array donde se almacenarán los buffers para enviar a la GPU.
         gl.glGenVertexArrays(vao.length,  vao, 0);
         // 004. Se activa el array a utilizar para este canvas.
@@ -83,7 +84,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     public void display(GLAutoDrawable drawable){
         GL4 gl = (GL4)GLContext.getCurrentGL();
         gl.glPointSize(30f);
-        gl.glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        //gl.glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         // 006. Se limpia el canvas en cada frame.
         gl.glClear(GL_DEPTH_BUFFER_BIT);
         gl.glClear(GL_COLOR_BUFFER_BIT);
@@ -109,8 +110,10 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
         
         // 020. Se renderizan los objetos en la escena.
-        ControladorDeMuros.dibujarMuros(gl, vbo, brickTexture); 
-        ControladorDePlanos.drawPlanes(gl, vbo, checkerBoardTexture);
+        Controlador.dibujar("v",gl, vbo, 1, checkerBoardTexture, ControladorDePlanos.planos, 6);
+        Controlador.dibujar("v",gl, vbo, 0, brickTexture, ControladorDeMuros.muros, 36); 
+        
+        Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6);
         ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
         if(ControladorDeEscena.drawSnap) ControladorDeAnclaje.drawOsnap(gl, vbo, ControladorDeEscena.worldX, ControladorDeEscena.worldZ, oLoc);
     }

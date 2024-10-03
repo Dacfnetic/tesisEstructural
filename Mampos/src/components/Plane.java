@@ -5,12 +5,13 @@
 package components;
 
 import com.jogamp.opengl.math.Vec3f;
+import rendering.Objeto;
 
 /**
  *
  * @author diego
  */
-public class Plane {
+public class Plane extends Objeto{
     
     private float z = 0.0f; // Plane height
     private float l = -8.0f; // Plane left
@@ -24,20 +25,27 @@ public class Plane {
     private float[][] nodes = {{l,z,t},{r,z,t},{l,z,b},{r,z,b}};
     
     public Plane(){
-        
+       
     }
      
-    public float[] setupPlanePositions(){
+    public void setupPlanePositions(){
+        vertex.clear();
+        
         float[] vertices = {
-            l,z,t,  l,z,b,  r,z,t,  r,z,b
+            l,z,t,  l,z,b,  r,z,t,  r,z,t, l,z,b, r,z,b
         };
-        return vertices;
+        for(int i = 0; i < vertices.length; i++){
+            vertex.add(vertices[i]);
+        }
     }
     
-    public float[] setupCoordsPositions(){
+    public void setupCoordsPositions(){
+        uv.clear();
         float[] vertices = {
-            0.0f, 1.0f, 0.0f, 0.0f,  1.0f, 1.0f  ,1.0f, 0.0f
+            0.0f, 1.0f,     0.0f, 0.0f,     1.0f, 1.0f,   1.0f, 1.0f,  0.0f, 0.0f,   1.0f, 0.0f
         };
-        return vertices;
+        for(int i = 0; i < vertices.length; i++){
+            uv.add(vertices[i]);
+        }
     }
 }

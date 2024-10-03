@@ -3,9 +3,10 @@ package components;
 import com.jogamp.opengl.math.Vec3f;
 import java.util.ArrayList;
 import java.util.List;
+import rendering.Objeto;
 
 //@author Diego
-public class Muro {
+public class Muro extends Objeto{
     
     public Punto puntos[];
     public Punto esquinas[];
@@ -24,8 +25,6 @@ public class Muro {
     private float areaTotal;
     private float cantidadDeBlocks;
     private float pesoTotal;
-        
-    public float vertex[] = {};
     
     public static List<Cota> cotas = new ArrayList<>();
 
@@ -37,6 +36,8 @@ public class Muro {
     }
 
     public void setVertexlikeMidWall() {
+        
+        vertex.clear();
 
         float deltaX = this.point2.x() - this.point1.x();
         float deltaZ = this.point2.z() - this.point1.z();
@@ -55,7 +56,7 @@ public class Muro {
         Vec3f t1v1 = new Vec3f(point1.x() + (t/2.0f) * sinAngle, -point1.y(),  point1.z() - (t/2.0f) * cosAngle);
         Vec3f t1v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle, -point2.y() - z, point2.z() - (t/2.0f) * cosAngle);
         Vec3f t1v3 = new Vec3f(point1.x() + (t/2.0f) * sinAngle, -point1.y() - z, point1.z() - (t/2.0f) * cosAngle);
-
+        
         Vec3f t2v1 = t1v1;
         Vec3f t2v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle,  -point2.y(), point2.z() - (t/2.0f) * cosAngle);
         Vec3f t2v3 = t1v2;
@@ -103,9 +104,9 @@ public class Muro {
         Vec3f t12v1 = t3v3;
         Vec3f t12v2 = t1v3;
         Vec3f t12v3 = t3v2;
-
-
-        float[] vertex = {
+        
+        
+        float[] vertices = {
             t1v1.x(), t1v1.y(), t1v1.z(),			t1v2.x(), t1v2.y(), t1v2.z(),	 		t1v3.x(), t1v3.y(), t1v3.z(),	
             t2v1.x(), t2v1.y(), t2v1.z(),			t2v2.x(), t2v2.y(), t2v2.z(),	 		t2v3.x(), t2v3.y(), t2v3.z(),
             t3v1.x(), t3v1.y(), t3v1.z(),			t3v2.x(), t3v2.y(), t3v2.z(),	 		t3v3.x(), t3v3.y(), t3v3.z(),	
@@ -119,9 +120,10 @@ public class Muro {
             t11v1.x(), t11v1.y(), t11v1.z(),			t11v2.x(), t11v2.y(), t11v2.z(),	 		t11v3.x(), t11v3.y(), t11v3.z(),	
             t12v1.x(), t12v1.y(), t12v1.z(),			t12v2.x(), t12v2.y(), t12v2.z(),	 		t12v3.x(), t12v3.y(), t12v3.z(),	
         };
-
-        this.vertex = vertex;
-
+        
+        for(int i = 0; i < vertices.length; i++){
+            vertex.add(vertices[i]);
+        }
     }
 
     public void calculateVertex(){
@@ -129,6 +131,8 @@ public class Muro {
     }
     
     public void setVertexlikeExteriorWall() {
+        vertex.clear();
+        
         float deltaX = this.point2.x() - this.point1.x();
         float deltaZ = this.point2.z() - this.point1.z();
 
@@ -193,7 +197,7 @@ public class Muro {
         Vec3f t12v2 = t1v3;
         Vec3f t12v3 = t3v2;
 
-        float[] vertex = {
+        float[] vertices = {
                     t1v1.x(), t1v1.y(), t1v1.z(),			t1v2.x(), t1v2.y(), t1v2.z(),	 		t1v3.x(), t1v3.y(), t1v3.z(),	
                     t2v1.x(), t2v1.y(), t2v1.z(),			t2v2.x(), t2v2.y(), t2v2.z(),	 		t2v3.x(), t2v3.y(), t2v3.z(),
                     t3v1.x(), t3v1.y(), t3v1.z(),			t3v2.x(), t3v2.y(), t3v2.z(),	 		t3v3.x(), t3v3.y(), t3v3.z(),	
@@ -207,7 +211,10 @@ public class Muro {
                     t11v1.x(), t11v1.y(), t11v1.z(),			t11v2.x(), t11v2.y(), t11v2.z(),	 		t11v3.x(), t11v3.y(), t11v3.z(),	
                     t12v1.x(), t12v1.y(), t12v1.z(),			t12v2.x(), t12v2.y(), t12v2.z(),	 		t12v3.x(), t12v3.y(), t12v3.z(),	
             };
-        this.vertex =  vertex;
+        
+        for(int i = 0; i < vertices.length; i++){
+            vertex.add(vertices[i]);
+        }
     }
 
     public void flipVertexlikeExteriorWall() {}

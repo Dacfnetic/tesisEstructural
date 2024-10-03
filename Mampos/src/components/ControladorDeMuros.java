@@ -5,6 +5,8 @@ import com.jogamp.opengl.math.Vec3f;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import org.joml.Matrix4f;
 import rendering.Controlador;
@@ -14,8 +16,8 @@ import rendering.Planta;
 public class ControladorDeMuros extends Controlador {
     
     public static List<Muro> muros = new ArrayList<>();
-    public static Muro muroTemporal = new Muro();
-    
+    public static final Muro temporal = new Muro();
+
     public static int contadorDeClicks = 0;
     public static boolean isChain = false;
     public static boolean isOrtho = false;
@@ -28,66 +30,8 @@ public class ControladorDeMuros extends Controlador {
     public static float x1, y1, z1;
     public static float x2, y2, z2;
     public static float distancia = 0;
-    
-    public static final Muro temporal = new Muro();
-    
-    private static void crearBufferDeMuros(GL4 gl, int[] vbo){  
-        int wallQuantity = components.Objects.walls.size();
-        if(wallQuantity > 0) {
-            float[] vertexPositions = new float[0];
-            for(int i = 0; i < wallQuantity; i ++) {
-                Muro nuevoMuro = components.Objects.getWalls(i);
-                if(nuevoMuro != null) {
-                    float [] vertices = nuevoMuro.vertex;
-                    int fal = vertexPositions.length;        //determines length of firstArray  
-                    int sal = vertices.length; 
-                    float[] result = new float[fal + sal];  //resultant array of size first array and second array  
-                    System.arraycopy(vertexPositions, 0, result, 0, fal);  
-                    System.arraycopy(vertices, 0, result, fal, sal); 
-                    vertexPositions = result;
-                }
-            }
-            rellenarBuffer(gl, vbo, vertexPositions, 0);
-    	}
-    }
-       
-    public static void dibujarMuros(GL4 gl, int[] vbo, int brickTexture) {  
-        int wallQuantity = components.Objects.walls.size();
-    	crearBufferDeMuros(gl, vbo);
-        prepararBuffer(gl, brickTexture, 36, wallQuantity);
-        //prepararBuffer(gl, brickTexture, 36, muros.size());
-    }
- 
-    private static void agregarMuroaMuros(Muro nuevoMuro){
-        /*Muro murosTemporales[] = new Muro[muros.length + 1]; // Creo un array de muros temporales que van a hacer referencia a los muros actuales pero va a tener espacio para agregar el nuevo muro
-        System.arraycopy(muros, 0, murosTemporales, 0, muros.length); // Copio el array
-        murosTemporales[murosTemporales.length-1] = nuevoMuro; // Asigno el nuevo muro a la última posición del array
-        muros = murosTemporales.clone();*/
-    }
-    
-    /*
-    public static void borrarMuro(Muro muroABorrar){
-        int indice = 0;
-        boolean coincidencia = false;
-        for (Muro muro : muros) {
-            if (muroABorrar.equals(muro)){
-                 coincidencia = true;
-                 break;
-            }
-            indice++;
-        }
-        if(coincidencia){
-            Muro murosTemporales[] = new Muro[muros.length - 1]; // Creo un array de muros temporales que van a hacer referencia a los muros actuales pero va a tener espacio para agregar el nuevo muro
-            System.arraycopy(muros, 0, murosTemporales, 0, indice); // Copio el array
-            if(indice != murosTemporales.length){
-               System.arraycopy(muros, indice + 1, murosTemporales, indice, muros.length - indice - 1); // Copio el array
-            }
-            muros = murosTemporales.clone();
-        }
-    }
-*/
+      
     public static void clickEnPlanta(Planta planta, MouseEvent e){
-        
         if(e.getButton() == 3){
             contadorDeClicks = 0;
             eliminarTemporal();
@@ -107,12 +51,10 @@ public class ControladorDeMuros extends Controlador {
             nuevoMuro.setPoints(new Vec3f(x1, z1, y1), new Vec3f(x2, z2, y2));
             setearVerticesDeMuroSegunForma(nuevoMuro);
             muros.add(nuevoMuro);
-            //agregarMuroaMuros(nuevoMuro);
-            components.Objects.addWall(nuevoMuro);
             
-            Cota nuevaCota = new Cota();
-            nuevaCota.setearVertices(nuevoMuro);  
-            ControladorDeCotas.agregarCotaACotas(nuevaCota);
+            //Cota nuevaCota = new Cota();
+            //nuevaCota.setearVertices(nuevoMuro);  
+            //ControladorDeCotas.agregarCotaACotas(nuevaCota);
             if(isChain){
                 x1 = nuevoMuro.point2.x();
                 y1 = nuevoMuro.point2.z(); 
@@ -127,8 +69,6 @@ public class ControladorDeMuros extends Controlador {
         contadorDeClicks++;
     }
     
-    public static void moverMuro(){}
-     
     public static void controlesEnPlanta(Planta planta, KeyEvent e){
         Matrix4f vMat = planta.vMat;
         if(e.getKeyCode() == KeyEvent.VK_O) isOrtho = !isOrtho;
@@ -163,12 +103,11 @@ public class ControladorDeMuros extends Controlador {
         }
     }
     
+    public static void moverMuro(){}
+     
     public static void eliminarTemporal(){
-        try {
-            components.Objects.walls.remove(temporal);
-        } catch (Exception er){
-            System.out.println(er);
-        }
+        try {muros.remove(temporal);} 
+        catch (Exception er) {System.out.println(er);}
     }
     
     public static void comprobarOrtogonalidad(){    
@@ -197,8 +136,7 @@ public class ControladorDeMuros extends Controlador {
                     contador = 0;
                 }
                 if(contador == 0){
-                    x = (float) components.Objects.vertices.get(i);
-                    
+                    x = (float) components.Objects.vertices.get(i);  
                 }
                 if(contador == 2){
                     z = (float) components.Objects.vertices.get(i);
@@ -227,8 +165,8 @@ public class ControladorDeMuros extends Controlador {
             comprobarOrtogonalidad();
             temporal.setPoints(new Vec3f(x1, z1, y1), new Vec3f(x2, z2, y2));        
             setearVerticesDeMuroSegunForma(temporal);
-            ControladorDeCotas.dibujarCotaDeMuroTemporal(temporal);
-            components.Objects.addWall(temporal);
+            //ControladorDeCotas.dibujarCotaDeMuroTemporal(temporal);
+            muros.add(temporal);
         }
     }
     

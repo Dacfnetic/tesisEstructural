@@ -22,32 +22,14 @@ public abstract class Objects {
         public static Story currentStory;
         
         public static void rellenarVertices(){
-            for(int i = 0; i < walls.size(); i++){
-                float[] vert = walls.get(i).vertex;
-                for(int j = 0; j < vert.length; j++){
-                    vertices.add(vert[j]);
-                }
-                
-            }
+            vertices.add(ControladorDeMuros.vertices);
         }
-	
-	public static Muro getWalls(int index) {
-		if(walls.size() > index) {
-			return walls.get(index);
-		}
-		return null;
-	}
-	
-	public static void addWall(Muro wall) {
-		walls.add(wall);
-	}
 	
 	public static Story[] getStories() {
             Story[] storiesArray = new Story[stories.size()];
             return stories.toArray(storiesArray);
 	}
-       
-        
+           
         public static void setStories(Object[][] data) {
             List<Story> storiesUpdated = new ArrayList<>();
             //Object[] storiesUpdatedArray = data.toArray();
@@ -87,8 +69,7 @@ public abstract class Objects {
             }
             stories = storiesUpdated;
 	}
-	
-        
+	       
         public static void setStories(List<Story> data) {
             List<Story> storiesUpdated = new ArrayList<>();
             //Object[] storiesUpdatedArray = data.toArray();
@@ -117,8 +98,7 @@ public abstract class Objects {
       
             stories = storiesUpdated;
 	}
-	
-        
+	   
 	public static void addStory(Story story) {
             stories.add(story);
 	}
