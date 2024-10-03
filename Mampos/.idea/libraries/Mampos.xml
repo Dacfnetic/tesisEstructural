@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Mampos">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/Mampos.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
