@@ -17,7 +17,7 @@ import java.awt.event.*;
 import java.nio.FloatBuffer;
 
 //@author Diego
-public class Planta implements GLEventListener, MouseListener, KeyListener, MouseMotionListener {
+public class Planta implements GLEventListener, MouseListener, KeyListener, MouseMotionListener, MouseWheelListener {
 		
     public GLCanvas myCanvas;
 
@@ -48,6 +48,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         myCanvas.addMouseListener(this);
         myCanvas.addKeyListener(this);
         myCanvas.addMouseMotionListener(this);
+        myCanvas.addMouseWheelListener(this);
         myCanvas.setBounds(0, 0, 600, 600); 
     }
     
@@ -131,11 +132,15 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     public void mouseMoved(MouseEvent e) {
         ControladorDeEscena.moverMouseEnPlanta(this, e);
     }
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        ControladorDeEscena.scrollMouseEnPlanta(this, e);
+    }
     
     @Override
     public void keyPressed(KeyEvent e) {
         ControladorDeMuros.controlesEnPlanta(this, e); 
-        MainFrame.popup();
+        
     }
 
     public void mouseReleased(MouseEvent e) {}
@@ -145,5 +150,6 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     public void mouseDragged(MouseEvent e) {}
     public void keyTyped(KeyEvent e) {}
     public void keyReleased(KeyEvent e) {}
+    
 
 }

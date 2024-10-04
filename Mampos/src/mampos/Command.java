@@ -12,8 +12,10 @@ import static com.jogamp.opengl.GL4.*;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.glu.GLU;
+import frames.MaterialsLibrary;
 
 import frames.StoriesDefinitionFrame;
+import frames.UnitsFrame;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -35,6 +37,9 @@ public abstract class Command {
     
     public static void openStoryEditor(){
         new StoriesDefinitionFrame().setVisible(true);
+    }
+    public static void openUnitsEditor(){
+        new UnitsFrame().setVisible(true);
     }
     
      

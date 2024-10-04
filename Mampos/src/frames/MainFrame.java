@@ -4,6 +4,10 @@
  */
 package frames;
 
+import bibliothek.gui.DockController;
+import bibliothek.gui.dock.DefaultDockable;
+import bibliothek.gui.dock.SplitDockStation;
+ import bibliothek.gui.dock.station.split.SplitDockGrid;
 import book.PlainRedCube;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
@@ -54,7 +58,21 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        DockController controller = new DockController();
+    
+        SplitDockStation station= new SplitDockStation();
+        controller.add( station );
+    
+        SplitDockGrid grid = new SplitDockGrid();
         
+     grid.addDockable( 0, 0, 2, 1, new DefaultDockable( "N" ) );
+     grid.addDockable( 0, 1, 1, 1, new DefaultDockable( "SW" ) );
+     grid.addDockable( 1, 1, 1, 1, new DefaultDockable( "SE" ) );
+     station.dropTree( grid.toTree() );
+    
+      this.add( station.getComponent() );
+
+
         
         
         /*Room room = new Room();
@@ -128,6 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
         right = new javax.swing.JTextField();
         top = new javax.swing.JTextField();
         bottom = new javax.swing.JTextField();
+        unitsButton = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         floor = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -211,6 +230,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         bottom.setText("-4");
         jToolBar1.add(bottom);
+
+        unitsButton.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        unitsButton.setText("Unidades");
+        unitsButton.setFocusable(false);
+        unitsButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        unitsButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        unitsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unitsButtonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(unitsButton);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
 
@@ -377,6 +408,11 @@ public class MainFrame extends javax.swing.JFrame {
         popup();
     }//GEN-LAST:event_floorKeyPressed
 
+    private void unitsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unitsButtonActionPerformed
+        // TODO add your handling code here:
+        mampos.Command.openUnitsEditor();
+    }//GEN-LAST:event_unitsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -433,5 +469,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField right;
     private javax.swing.JPopupMenu toolsPopupMenu;
     private javax.swing.JTextField top;
+    private javax.swing.JButton unitsButton;
     // End of variables declaration//GEN-END:variables
 }

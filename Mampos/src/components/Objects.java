@@ -22,7 +22,7 @@ public abstract class Objects {
         public static Story currentStory;
         
         public static void rellenarVertices(){
-            vertices.add(ControladorDeMuros.vertices);
+            vertices = ControladorDeMuros.vertices;
         }
 	
 	public static Story[] getStories() {
