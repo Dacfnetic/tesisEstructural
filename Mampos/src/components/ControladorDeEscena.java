@@ -1,6 +1,5 @@
 package components;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import rendering.Controlador;
@@ -14,6 +13,8 @@ public abstract class ControladorDeEscena extends Controlador{
     public static float worldX, worldY, worldZ = 0;
     public static float xScreen, yScreen, zScreen = 0;
     
+    public static boolean usandoHerramientaMuro = false;
+    
     public static void setDimension(float left, float right, float top, float bottom){
         ControladorDeEscena.left = left;
         ControladorDeEscena.right = right;
@@ -24,7 +25,8 @@ public abstract class ControladorDeEscena extends Controlador{
     public static void moverMouseEnPlanta(Planta planta, MouseEvent e){     
         calcularCoordenadasGlobalesEnPlanta(planta, e);   
         ControladorDeMuros.comprobarAnclaje();
-        ControladorDeMuros.dibujarMuroTemporal();
+        if(usandoHerramientaMuro) ControladorDeMuros.dibujarMuroTemporal();
+        
     }
     
     public static void scrollMouseEnPlanta(Planta planta, MouseWheelEvent e){     

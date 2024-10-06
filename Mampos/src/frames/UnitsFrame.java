@@ -1,18 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package frames;
 
-<<<<<<< HEAD
-import javafx.scene.control.Label;
-
-=======
->>>>>>> main
-/**
- *
- * @author diego
- */
 public class UnitsFrame extends javax.swing.JFrame {
 
     /**
@@ -20,10 +7,6 @@ public class UnitsFrame extends javax.swing.JFrame {
      */
     public UnitsFrame() {
         initComponents();
-<<<<<<< HEAD
-        Label prueba = new Label();
-=======
->>>>>>> main
     }
 
     /**

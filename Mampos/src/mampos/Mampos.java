@@ -8,6 +8,7 @@ import components.ColumnaRectangular;
 import components.ControladorDePlanos;
 import components.Objects;
 import components.Plane;
+import frames.Interfaz;
 import frames.MainFrame;
 import java.awt.EventQueue;
 import rendering.Loader;
@@ -33,10 +34,16 @@ public class Mampos {
                 plano.setupPlanePositions();
                 plano.setupCoordsPositions();
                 ControladorDePlanos.planos.add(plano);
-                MainFrame cuadro = new frames.MainFrame();
-                //cuadro.canvasCoords.setText("Hola");
-                cuadro.setVisible(true);
                 
+                /*MainFrame cuadro = new frames.MainFrame();
+                //cuadro.canvasCoords.setText("Hola");
+                cuadro.setVisible(true);*/
+                
+                Interfaz cuadro = new Interfaz();
+                //cuadro.canvasCoords.setText("Hola");
+                cuadro.desplegar();
+              
+              
                 ColumnaRectangular C1 = new ColumnaRectangular();
                 C1.setParametros(35f, 35f, 450f, 0.65f);
                 C1.imprimir();

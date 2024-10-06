@@ -33,8 +33,10 @@ public class ControladorDeMuros extends Controlador {
     public static float distancia = 0;
       
     public static void clickEnPlanta(Planta planta, MouseEvent e){
-        if(e.getButton() == 3){
+        if(ControladorDeEscena.usandoHerramientaMuro){
+            if(e.getButton() == 3){
             contadorDeClicks = 0;
+            ControladorDeEscena.usandoHerramientaMuro = false;
             eliminarTemporal();
             return;
         }
@@ -68,6 +70,8 @@ public class ControladorDeMuros extends Controlador {
             }
         }
         contadorDeClicks++;
+        }
+        
     }
     
     public static void controlesEnPlanta(Planta planta, KeyEvent e){
@@ -77,6 +81,7 @@ public class ControladorDeMuros extends Controlador {
         if(e.getKeyCode() == KeyEvent.VK_F) isFlipped = !isFlipped;
         if(e.getKeyCode() == KeyEvent.VK_C) isChain = !isChain;
         if(e.getKeyCode() == KeyEvent.VK_M) MainFrame.popup();
+        if(e.getKeyCode() == KeyEvent.VK_L) ControladorDeEscena.usandoHerramientaMuro = true;
         if(e.getKeyCode() == KeyEvent.VK_W) vMat.translate(0.0f, 0.0f, -0.1f); // System.out.println("moverse hacia adelante en perspectiva");
         if(e.getKeyCode() == KeyEvent.VK_S) vMat.translate(0.0f, 0.0f, 0.1f); // System.out.println("moverse hacia atras en perspectiva");   
         if(e.getKeyCode() == KeyEvent.VK_D) vMat.translate(-0.1f, 0.0f, 0.0f);  //System.out.println("moverse a la derecha en perspectiva");  

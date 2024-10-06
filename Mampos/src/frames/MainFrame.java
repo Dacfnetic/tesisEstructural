@@ -1,18 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package frames;
 
 import bibliothek.gui.DockController;
 import bibliothek.gui.dock.DefaultDockable;
 import bibliothek.gui.dock.SplitDockStation;
- import bibliothek.gui.dock.station.split.SplitDockGrid;
+import bibliothek.gui.dock.common.CControl;
+import bibliothek.gui.dock.common.DefaultSingleCDockable;
+import bibliothek.gui.dock.common.SingleCDockable;
+import bibliothek.gui.dock.station.split.SplitDockGrid;
 import book.PlainRedCube;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
 import components.ControladorDeEscena;
 import components.Objects;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import mampos.Utils;
@@ -27,11 +29,6 @@ import rendering.Planta;
 import rendering.ProjectionSpace;
 import rendering.Room;
 
-
-/**
- *
- * @author Diego
- */
 public class MainFrame extends javax.swing.JFrame {
 
     /**
@@ -55,12 +52,14 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
+    
+    
+    
+    
     public MainFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-        
-
-        
+      
         
         /*Room room = new Room();
         room.setMyCanvas(new GLCanvas());
@@ -277,7 +276,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(432, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addGap(318, 318, 318))
         );
