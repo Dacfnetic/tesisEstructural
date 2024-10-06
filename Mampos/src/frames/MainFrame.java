@@ -58,20 +58,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-        DockController controller = new DockController();
-    
-        SplitDockStation station= new SplitDockStation();
-        controller.add( station );
-    
-        SplitDockGrid grid = new SplitDockGrid();
         
-     grid.addDockable( 0, 0, 2, 1, new DefaultDockable( "N" ) );
-     grid.addDockable( 0, 1, 1, 1, new DefaultDockable( "SW" ) );
-     grid.addDockable( 1, 1, 1, 1, new DefaultDockable( "SE" ) );
-     station.dropTree( grid.toTree() );
-    
-      this.add( station.getComponent() );
-
 
         
         
