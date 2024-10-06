@@ -2,6 +2,7 @@ package components;
 
 import com.jogamp.opengl.GL4;
 import com.jogamp.opengl.math.Vec3f;
+import frames.MainFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class ControladorDeMuros extends Controlador {
         if(e.getKeyCode() == KeyEvent.VK_E) isExterior = !isExterior;
         if(e.getKeyCode() == KeyEvent.VK_F) isFlipped = !isFlipped;
         if(e.getKeyCode() == KeyEvent.VK_C) isChain = !isChain;
+        if(e.getKeyCode() == KeyEvent.VK_M) MainFrame.popup();
         if(e.getKeyCode() == KeyEvent.VK_W) vMat.translate(0.0f, 0.0f, -0.1f); // System.out.println("moverse hacia adelante en perspectiva");
         if(e.getKeyCode() == KeyEvent.VK_S) vMat.translate(0.0f, 0.0f, 0.1f); // System.out.println("moverse hacia atras en perspectiva");   
         if(e.getKeyCode() == KeyEvent.VK_D) vMat.translate(-0.1f, 0.0f, 0.0f);  //System.out.println("moverse a la derecha en perspectiva");  
@@ -129,18 +131,18 @@ public class ControladorDeMuros extends Controlador {
             int contador = -1;
             float x = 0.0f;
             float z;
-            for(int i = 0; i < components.Objects.vertices.size(); i++){
+            for(int i = 0; i < vertices.size(); i++){
               
                 contador++;
                 if(contador > 2){
                     contador = 0;
                 }
                 if(contador == 0){
-                    x = (float) components.Objects.vertices.get(i);  
+                    x = (float) vertices.get(i);  
                 }
                 if(contador == 2){
-                    z = (float) components.Objects.vertices.get(i);
-                    if(Math.abs(ControladorDeEscena.worldX-x)< 0.05 && Math.abs(ControladorDeEscena.worldZ-z)< 0.05){
+                    z = (float) vertices.get(i);
+                    if(Math.abs(ControladorDeEscena.worldX-x)< 0.02 && Math.abs(ControladorDeEscena.worldZ-z)< 0.02){
                         ControladorDeEscena.worldX = x;
                         ControladorDeEscena.worldZ = z;
                         ControladorDeEscena.drawSnap = true;

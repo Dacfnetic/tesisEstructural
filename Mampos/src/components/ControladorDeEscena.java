@@ -1,6 +1,8 @@
 package components;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import rendering.Controlador;
 import rendering.Planta;
 
@@ -21,8 +23,28 @@ public abstract class ControladorDeEscena extends Controlador{
     
     public static void moverMouseEnPlanta(Planta planta, MouseEvent e){     
         calcularCoordenadasGlobalesEnPlanta(planta, e);   
-        //ControladorDeMuros.comprobarAnclaje();
+        ControladorDeMuros.comprobarAnclaje();
         ControladorDeMuros.dibujarMuroTemporal();
+    }
+    
+    public static void scrollMouseEnPlanta(Planta planta, MouseWheelEvent e){     
+        System.out.println(e);
+        if(e.getWheelRotation() == 1) { // System.out.println("Zoom");
+            ControladorDeEscena.left -= 0.1f;
+            ControladorDeEscena.right += 0.1f;
+            ControladorDeEscena.top += 0.1f;
+            ControladorDeEscena.bottom -= 0.1f;
+            ControladorDeEscena.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
+            planta.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
+        }
+        if(e.getWheelRotation() == -1) { // System.out.println("Zoom");         
+            ControladorDeEscena.left += 0.1f;
+            ControladorDeEscena.right -= 0.1f;
+            ControladorDeEscena.top -= 0.1f;
+            ControladorDeEscena.bottom += 0.1f;
+            ControladorDeEscena.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
+            planta.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
+        }
     }
     
     public static void calcularCoordenadasGlobalesEnPlanta(Planta planta, MouseEvent e){

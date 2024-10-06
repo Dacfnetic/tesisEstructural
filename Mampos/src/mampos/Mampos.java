@@ -4,6 +4,7 @@
  */
 package mampos;
 
+import components.ColumnaRectangular;
 import components.ControladorDePlanos;
 import components.Objects;
 import components.Plane;
@@ -11,6 +12,7 @@ import frames.MainFrame;
 import java.awt.EventQueue;
 import rendering.Loader;
 import rendering.Renderer;
+import units.Longitud;
 /**
  *
  * @author Diego
@@ -34,7 +36,12 @@ public class Mampos {
                 MainFrame cuadro = new frames.MainFrame();
                 //cuadro.canvasCoords.setText("Hola");
                 cuadro.setVisible(true);
-             
+                
+                ColumnaRectangular C1 = new ColumnaRectangular();
+                C1.setParametros(35f, 35f, 450f, 0.65f);
+                C1.imprimir();
+                
+                System.out.println(Longitud.convertirAPulgadas(2.54f, "cm") + " in");
              
             }
         };	
