@@ -4,6 +4,11 @@
  */
 package frames;
 
+<<<<<<< HEAD
+import javafx.scene.control.Label;
+
+=======
+>>>>>>> main
 /**
  *
  * @author diego
@@ -15,6 +20,10 @@ public class UnitsFrame extends javax.swing.JFrame {
      */
     public UnitsFrame() {
         initComponents();
+<<<<<<< HEAD
+        Label prueba = new Label();
+=======
+>>>>>>> main
     }
 
     /**

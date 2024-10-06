@@ -4,6 +4,10 @@
  */
 package frames;
 
+import bibliothek.gui.DockController;
+import bibliothek.gui.dock.DefaultDockable;
+import bibliothek.gui.dock.SplitDockStation;
+ import bibliothek.gui.dock.station.split.SplitDockGrid;
 import book.PlainRedCube;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
@@ -55,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         
+
         
         
         /*Room room = new Room();
