@@ -35,13 +35,11 @@ public class Mampos {
                 plano.setupCoordsPositions();
                 ControladorDePlanos.planos.add(plano);
                 
-                /*MainFrame cuadro = new frames.MainFrame();
-                //cuadro.canvasCoords.setText("Hola");
-                cuadro.setVisible(true);*/
+                MainFrame cuadro = new frames.MainFrame();
+                cuadro.setVisible(true);
                 
-                Interfaz cuadro = new Interfaz();
-                //cuadro.canvasCoords.setText("Hola");
-                cuadro.desplegar();
+                //Interfaz cuadro = new Interfaz();
+                //cuadro.desplegar();
               
               
                 ColumnaRectangular C1 = new ColumnaRectangular();

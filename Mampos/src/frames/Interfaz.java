@@ -5,17 +5,14 @@ import bibliothek.gui.dock.common.CControl;
 import bibliothek.gui.dock.common.CLocation;
 import bibliothek.gui.dock.common.DefaultSingleCDockable;
 import bibliothek.gui.dock.common.SingleCDockable;
-import bibliothek.util.container.Single;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
 import components.ControladorDeEscena;
 import components.Objects;
-import static frames.MainFrame.floor;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import rendering.Planta;
 
 
