@@ -11,6 +11,7 @@ import components.Plane;
 import frames.Interfaz;
 import frames.MainFrame;
 import java.awt.EventQueue;
+import optimization.Optimizar;
 import rendering.Loader;
 import rendering.Renderer;
 import units.Longitud;
@@ -37,7 +38,7 @@ public class Mampos {
                 
                 MainFrame cuadro = new frames.MainFrame();
                 cuadro.setVisible(true);
-                
+                Optimizar o = new Optimizar();
                 //Interfaz cuadro = new Interfaz();
                 //cuadro.desplegar();
               
