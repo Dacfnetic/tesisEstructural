@@ -33,10 +33,10 @@ public class ControladorDeMuros extends Controlador {
     public static float distancia = 0;
       
     public static void clickEnPlanta(Planta planta, MouseEvent e){
-        if(ControladorDeEscena.usandoHerramientaMuro){
+        if(ControladorDeEscena.usandoHerramientaMuro.isUsed()){
             if(e.getButton() == 3){
             contadorDeClicks = 0;
-            ControladorDeEscena.usandoHerramientaMuro = false;
+            ControladorDeEscena.usandoHerramientaMuro.setEstado(false);
             eliminarTemporal();
             return;
         }
@@ -72,42 +72,6 @@ public class ControladorDeMuros extends Controlador {
         contadorDeClicks++;
         }
         
-    }
-    
-    public static void controlesEnPlanta(Planta planta, KeyEvent e){
-        Matrix4f vMat = planta.vMat;
-        if(e.getKeyCode() == KeyEvent.VK_O) isOrtho = !isOrtho;
-        if(e.getKeyCode() == KeyEvent.VK_E) isExterior = !isExterior;
-        if(e.getKeyCode() == KeyEvent.VK_F) isFlipped = !isFlipped;
-        if(e.getKeyCode() == KeyEvent.VK_C) isChain = !isChain;
-        if(e.getKeyCode() == KeyEvent.VK_M) MainFrame.popup();
-        if(e.getKeyCode() == KeyEvent.VK_L) ControladorDeEscena.usandoHerramientaMuro = true;
-        if(e.getKeyCode() == KeyEvent.VK_W) vMat.translate(0.0f, 0.0f, -0.1f); // System.out.println("moverse hacia adelante en perspectiva");
-        if(e.getKeyCode() == KeyEvent.VK_S) vMat.translate(0.0f, 0.0f, 0.1f); // System.out.println("moverse hacia atras en perspectiva");   
-        if(e.getKeyCode() == KeyEvent.VK_D) vMat.translate(-0.1f, 0.0f, 0.0f);  //System.out.println("moverse a la derecha en perspectiva");  
-        if(e.getKeyCode() == KeyEvent.VK_A) vMat.translate(0.1f, 0.0f, 0.0f); //System.out.println("moverse a la izquierda en perspectiva");        
-        if(e.getKeyCode() == KeyEvent.VK_Z) { // System.out.println("Zoom");
-            ControladorDeEscena.left -= 0.1f;
-            ControladorDeEscena.right += 0.1f;
-            ControladorDeEscena.top += 0.1f;
-            ControladorDeEscena.bottom -= 0.1f;
-            ControladorDeEscena.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
-            planta.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
-        }
-        if(e.getKeyCode() == KeyEvent.VK_X) { // System.out.println("Zoom");         
-            ControladorDeEscena.left += 0.1f;
-            ControladorDeEscena.right -= 0.1f;
-            ControladorDeEscena.top -= 0.1f;
-            ControladorDeEscena.bottom += 0.1f;
-            ControladorDeEscena.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
-            planta.setDimension(ControladorDeEscena.left, ControladorDeEscena.right, ControladorDeEscena.top, ControladorDeEscena.bottom);
-        }
-        char tecla = e.getKeyChar();
-        if(Character.isDigit(tecla)){
-            crearPorClicks = false;
-            crearPorDistanciaYClick = true;
-            distancia = Float.parseFloat(String.valueOf(tecla));
-        }
     }
     
     public static void moverMuro(){}

@@ -8,6 +8,7 @@ import components.ColumnaRectangular;
 import components.ControladorDePlanos;
 import components.Objects;
 import components.Plane;
+import dibujo.Linea;
 import frames.Interfaz;
 import frames.MainFrame;
 import java.awt.EventQueue;
@@ -36,11 +37,11 @@ public class Mampos {
                 plano.setupCoordsPositions();
                 ControladorDePlanos.planos.add(plano);
                 
-                MainFrame cuadro = new frames.MainFrame();
-                cuadro.setVisible(true);
+                //MainFrame cuadro = new frames.MainFrame();
+               // cuadro.setVisible(true);
                 Optimizar o = new Optimizar();
-                //Interfaz cuadro = new Interfaz();
-                //cuadro.desplegar();
+                Interfaz cuadro = new Interfaz();
+                cuadro.desplegar();
               
               
                 ColumnaRectangular C1 = new ColumnaRectangular();
@@ -49,6 +50,15 @@ public class Mampos {
                 
                 System.out.println(Longitud.convertirAPulgadas(2.54f, "cm") + " in");
              
+                Linea prueba = new Linea();
+                prueba.setPunto1(0, 0, 0);
+                prueba.setPunto2(5, 2, 3);
+                prueba.setVectorDirector();
+                prueba.imprimir();
+                
+                
+                
+                
             }
         };	
         EventQueue.invokeLater(runner);

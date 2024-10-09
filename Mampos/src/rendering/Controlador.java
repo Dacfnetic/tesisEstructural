@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package rendering;
 
 import com.jogamp.common.nio.Buffers;
@@ -15,16 +11,11 @@ import static com.jogamp.opengl.GL.GL_TEXTURE_2D;
 import static com.jogamp.opengl.GL.GL_TRIANGLES;
 import com.jogamp.opengl.GL4;
 import static components.ControladorDeMuros.vertices;
-import components.Muro;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- *
- * @author diego
- */
 public abstract class Controlador {
     
     private static Iterator<?> iterador;
@@ -50,7 +41,7 @@ public abstract class Controlador {
         gl.glBufferData(GL_ARRAY_BUFFER, vertBuf.limit()*4, vertBuf, GL_STATIC_DRAW);
     }
     
-    public static void prepararBufferDeVertices(GL4 gl, int texture, int vertexQuantity, int objectsQuantity){
+    public static void prepararBufferDeVertices(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
         // 000. Se selecciona la textura activa.
         gl.glActiveTexture(GL_TEXTURE0);
         // 001. Se enlaza la textura activa.
@@ -62,7 +53,7 @@ public abstract class Controlador {
         // adjust OpenGL settings and draw model
         gl.glEnable(GL_DEPTH_TEST);
         gl.glDepthFunc(GL_LEQUAL);
-        gl.glDrawArrays(GL_TRIANGLES, 0, vertexQuantity * objectsQuantity);     
+        gl.glDrawArrays(mode, 0, vertexQuantity * objectsQuantity);     
     }
     
     public static void crearBufferDeTexturas(GL4 gl, int[] vbo, List lista, int vboIndex){ 
@@ -84,7 +75,7 @@ public abstract class Controlador {
         gl.glBufferData(GL_ARRAY_BUFFER, vertBuf.limit()*4, vertBuf, GL_STATIC_DRAW);
     }
     
-    public static void prepararBufferDeTexturas(GL4 gl, int texture, int vertexQuantity, int objectsQuantity){
+    public static void prepararBufferDeTexturas(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
         // 000. Se selecciona la textura activa.
         gl.glActiveTexture(GL_TEXTURE0);
         // 001. Se enlaza la textura activa.
@@ -96,17 +87,17 @@ public abstract class Controlador {
         // adjust OpenGL settings and draw model
         gl.glEnable(GL_DEPTH_TEST);
         gl.glDepthFunc(GL_LEQUAL);
-        gl.glDrawArrays(GL_TRIANGLES, 0, vertexQuantity * objectsQuantity);     
+        gl.glDrawArrays(mode, 0, vertexQuantity * objectsQuantity);     
     }
      
-    public static void dibujar(String tipo, GL4 gl, int[] vbo, int vboIndex, int brickTexture, List lista, int verticesDeObjeto) {  
+    public static void dibujar(String tipo, GL4 gl, int[] vbo, int vboIndex, int brickTexture, List lista, int verticesDeObjeto, int mode) {  
     	if(tipo  == "v"){
             crearBufferDeVertices(gl, vbo, lista, vboIndex);
-            prepararBufferDeVertices(gl, brickTexture, verticesDeObjeto, lista.size());
+            prepararBufferDeVertices(gl, brickTexture, verticesDeObjeto, lista.size(), mode);
         }
         if(tipo  == "t"){
             crearBufferDeTexturas(gl, vbo, lista, vboIndex);
-            prepararBufferDeTexturas(gl, brickTexture, verticesDeObjeto, lista.size());
+            prepararBufferDeTexturas(gl, brickTexture, verticesDeObjeto, lista.size(), mode);
         }
         
     }

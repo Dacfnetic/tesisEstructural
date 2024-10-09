@@ -5,16 +5,20 @@ import static com.jogamp.opengl.GL4.*;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.*;
 import static com.jogamp.opengl.GL.GL_FRONT_AND_BACK;
+import static com.jogamp.opengl.GL.GL_TRIANGLES;
 import static com.jogamp.opengl.GL2GL3.GL_LINE;
 import com.jogamp.opengl.awt.GLCanvas;
 import components.ControladorDeAnclaje;
 import components.ControladorDeCotas;
 import components.ControladorDeEscena;
+import components.ControladorDeLineas;
 import components.ControladorDeMuros;
 import components.ControladorDePlanos;
 import frames.MainFrame;
 import java.awt.event.*;
 import java.nio.FloatBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@author Diego
 public class Planta implements GLEventListener, MouseListener, KeyListener, MouseMotionListener, MouseWheelListener {
@@ -111,10 +115,11 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
         
         // 020. Se renderizan los objetos en la escena.
-        Controlador.dibujar("v",gl, vbo, 1, checkerBoardTexture, ControladorDePlanos.planos, 6);
-        Controlador.dibujar("v",gl, vbo, 0, brickTexture, ControladorDeMuros.muros, 36); 
+        Controlador.dibujar("v",gl, vbo, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
+        Controlador.dibujar("v",gl, vbo, 0, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
+        Controlador.dibujar("v",gl, vbo, 3, brickTexture, ControladorDeLineas.lineas, 2, GL_LINES); 
         
-        Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6);
+        Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
         ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
         if(ControladorDeEscena.drawSnap) ControladorDeAnclaje.drawOsnap(gl, vbo, ControladorDeEscena.worldX, ControladorDeEscena.worldZ, oLoc);
     }
@@ -126,6 +131,11 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     @Override
     public void mousePressed(MouseEvent e) {
         ControladorDeMuros.clickEnPlanta(this, e);
+        try {
+            ControladorDeLineas.clickEnPlanta(this, e, ControladorDeEscena.usandoHerramientaLinea, ControladorDeEscena.contadorDeClicks);
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Planta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -139,8 +149,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     
     @Override
     public void keyPressed(KeyEvent e) {
-        ControladorDeMuros.controlesEnPlanta(this, e); 
-        
+        ControladorDeEscena.controlesEnPlanta(this, e);    
     }
 
     public void mouseReleased(MouseEvent e) {}
