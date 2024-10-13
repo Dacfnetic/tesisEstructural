@@ -54,14 +54,9 @@ public class Mampos {
                 prueba.setPunto1(0, 0, 0);
                 prueba.setPunto2(5, 2, 3);
                 prueba.setVectorDirector();
-                prueba.imprimir();
-                
-                
-                
-                
+                prueba.imprimir();  
             }
         };	
         EventQueue.invokeLater(runner);
-    }
-	
+    }	
 }

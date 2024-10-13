@@ -59,11 +59,12 @@ public class ControladorDeLineas extends Controlador {
                 x2 = ControladorDeEscena.worldX;
                 z2 = ControladorDeEscena.worldZ; 
                 comprobarOrtogonalidad();
-                lineaTemporal.setPunto2(x2, z2, y2);
-                // Se calculan los vertices
-                lineaTemporal.setVertices();
+                
+                Linea nuevaLinea = new Linea();
+                nuevaLinea.setPunto1(x1, z1, y1);
+                nuevaLinea.setPunto2(x2, z2, y2);
+                nuevaLinea.setVertices(); 
                 // Se agrega la nueva linea
-                Linea nuevaLinea = (Linea)lineaTemporal.clone();
                 lineas.add(nuevaLinea);
                 // Si la opción de cadena está activada
                 if(isChain){

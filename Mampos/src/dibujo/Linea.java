@@ -2,9 +2,9 @@ package dibujo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import org.ujmp.core.DenseMatrix;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation;
 import rendering.Objeto;
 
 public class Linea extends Objeto implements Cloneable{
@@ -12,6 +12,8 @@ public class Linea extends Objeto implements Cloneable{
     private Matrix punto1 = DenseMatrix.Factory.zeros(3, 1);
     private Matrix punto2 = DenseMatrix.Factory.zeros(3, 1);
     private Matrix vectorDirector = DenseMatrix.Factory.zeros(3, 1);
+    private Matrix vectorNormalizado = DenseMatrix.Factory.zeros(3, 1);
+    private double magnitud = 0;
     public static List<Float> verticesDeLinea = new ArrayList<>();
     
     public Linea(){}
@@ -30,15 +32,21 @@ public class Linea extends Objeto implements Cloneable{
     
     public void setVectorDirector(){
         vectorDirector = punto2.minus(punto1);
+        Matrix v2 = vectorDirector.times(vectorDirector);
+        double a = v2.getValueSum();
+        magnitud = Math.sqrt(a);
+        vectorNormalizado = vectorDirector.times(1/magnitud);
+        double productoPunto = vectorDirector.transpose().mtimes(vectorNormalizado).getAsDouble(0, 0);
+        double c = productoPunto;
     }
     
     public void setVertices(){
         vertex.clear();
         vertex.add(punto1.getAsFloat(0,0));
-        vertex.add(punto1.getAsFloat(1,0));
         vertex.add(punto1.getAsFloat(2,0));
+        vertex.add(punto1.getAsFloat(1,0));
         vertex.add(punto2.getAsFloat(0,0));
-        vertex.add(punto2.getAsFloat(1,0));
+        vertex.add(punto2.getAsFloat(2,0));
         vertex.add(punto2.getAsFloat(1,0));
     }
     

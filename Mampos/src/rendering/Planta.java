@@ -14,6 +14,7 @@ import components.ControladorDeEscena;
 import components.ControladorDeLineas;
 import components.ControladorDeMuros;
 import components.ControladorDePlanos;
+import frames.Interfaz;
 import frames.MainFrame;
 import java.awt.event.*;
 import java.nio.FloatBuffer;
@@ -54,6 +55,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         myCanvas.addMouseMotionListener(this);
         myCanvas.addMouseWheelListener(this);
         myCanvas.setBounds(0, 0, 600, 600); 
+        
     }
     
     public void setDimension(float left, float right, float top, float bottom){
@@ -84,10 +86,19 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     	cameraX	= 0.0f;	cameraY	= 0.0f;	cameraZ	= 0.1f;
         vMat.translate(-cameraX, -cameraY, -cameraZ);
         vMat.rotate(6*(float) (Math.PI/12),1.0f,0.0f,0.0f);
+        
+        
+        
+    }
+    
+    public void changeSize(){
+        myCanvas.setBounds(0, 0, Interfaz.verde.getWidth(), Interfaz.verde.getHeight()); 
     }
     
     public void display(GLAutoDrawable drawable){
+        
         GL4 gl = (GL4)GLContext.getCurrentGL();
+        changeSize();
         gl.glPointSize(30f);
         //gl.glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         // 006. Se limpia el canvas en cada frame.
@@ -114,6 +125,8 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
       	mvMat.mul(mMat);
         gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
         
+        
+        
         // 020. Se renderizan los objetos en la escena.
         Controlador.dibujar("v",gl, vbo, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
         Controlador.dibujar("v",gl, vbo, 0, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
@@ -124,7 +137,9 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         if(ControladorDeEscena.drawSnap) ControladorDeAnclaje.drawOsnap(gl, vbo, ControladorDeEscena.worldX, ControladorDeEscena.worldZ, oLoc);
     }
          
-    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height){}
+    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height){
+        changeSize();
+    }
     
     public void dispose(GLAutoDrawable drawable){}
 
