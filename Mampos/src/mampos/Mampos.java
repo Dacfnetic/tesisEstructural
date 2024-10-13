@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package mampos;
 
 import components.ColumnaRectangular;
@@ -19,7 +16,7 @@ import units.Longitud;
 /**
  *
  * @author Diego
- */
+
 public class Mampos {
        
     public static void main(String args[]) {
@@ -59,4 +56,4 @@ public class Mampos {
         };	
         EventQueue.invokeLater(runner);
     }	
-}
+}*/
