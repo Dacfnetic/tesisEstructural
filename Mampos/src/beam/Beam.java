@@ -113,4 +113,23 @@ public class Beam {
         return Bw;
     }
     
+    
+    
+    
+    
+    public String seleccionarViga(double largo, double areaTributaria){
+        if(largo > 4.5d) return "Esa viga es muy larga para el método simplificado";
+        if(areaTributaria > 13d) return "Esa viga carga es cargada por demasiada área para el método simplificado";
+        
+        double base = 5;
+        double alto = 5;
+        String aceroSuperior = "";
+        String aceroInferior = "";
+        String estribos = "";
+        
+        return "Usar una viga de ancho " + base + " cm. con un alto de " + alto +
+               " cm. Incluyendo el espesor de la losa. En la parte superior de la viga usar " + aceroSuperior +
+               ".  En la parte inferior de la viga usar " + aceroInferior + " y de estribos usar" + estribos;
+    
+    }
 }

@@ -5,10 +5,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import mampos.BDMamposSQLITE;
+import mampos.SQLITE;
 
 public class eleccion extends Application {
 
     public static void main(String[] args) {
+        BDMamposSQLITE bd = new BDMamposSQLITE();
+        bd.crearTabla();
         launch(args);
     }
     @Override
