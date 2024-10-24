@@ -2,7 +2,9 @@
 package mampos;
 
 import components.ColumnaRectangular;
+import components.ControladorDeLosas;
 import components.ControladorDePlanos;
+import components.Losa;
 import components.Objects;
 import components.Plane;
 import dibujo.Linea;
@@ -13,9 +15,6 @@ import optimization.Optimizar;
 import rendering.Loader;
 import rendering.Renderer;
 import units.Longitud;
-/**
- *
- * @author Diego
 
 public class Mampos {
        
@@ -34,9 +33,13 @@ public class Mampos {
                 plano.setupCoordsPositions();
                 ControladorDePlanos.planos.add(plano);
                 
+                Losa losa = new Losa();
+                losa.setupLosaPositions();
+                ControladorDeLosas.losas.add(losa);
+                
                 //MainFrame cuadro = new frames.MainFrame();
-               // cuadro.setVisible(true);
-                Optimizar o = new Optimizar();
+                //cuadro.setVisible(true);
+                //Optimizar o = new Optimizar();
                 Interfaz cuadro = new Interfaz();
                 cuadro.desplegar();
               
@@ -56,4 +59,4 @@ public class Mampos {
         };	
         EventQueue.invokeLater(runner);
     }	
-}*/
+}

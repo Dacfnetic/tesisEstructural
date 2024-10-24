@@ -12,7 +12,6 @@ package mampos;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import static com.jogamp.opengl.GL4.*;
-import javafx.fxml.FXMLLoader;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.glu.GLU;
 import components.Story;
@@ -32,12 +31,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -318,13 +312,6 @@ public abstract class Utils {
             
         }
     }
-    
-    public static void changeScene(Class clase, ActionEvent e, String fmxlPath) throws Exception{
-        Parent root = FXMLLoader.load(clase.getResource(fmxlPath));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
+ 
     
 }

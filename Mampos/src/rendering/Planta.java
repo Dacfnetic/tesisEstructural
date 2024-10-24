@@ -92,7 +92,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     }
     
     public void changeSize(){
-        myCanvas.setBounds(0, 0, Interfaz.verde.getWidth(), Interfaz.verde.getHeight()); 
+       // myCanvas.setBounds(0, 0, Interfaz.verde.getWidth(), Interfaz.verde.getHeight()); 
     }
     
     public void display(GLAutoDrawable drawable){

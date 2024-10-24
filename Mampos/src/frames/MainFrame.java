@@ -1,19 +1,10 @@
 package frames;
 
-import bibliothek.gui.DockController;
-import bibliothek.gui.dock.DefaultDockable;
-import bibliothek.gui.dock.SplitDockStation;
-import bibliothek.gui.dock.common.CControl;
-import bibliothek.gui.dock.common.DefaultSingleCDockable;
-import bibliothek.gui.dock.common.SingleCDockable;
-import bibliothek.gui.dock.station.split.SplitDockGrid;
-import book.PlainRedCube;
+
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
 import components.ControladorDeEscena;
 import components.Objects;
-import java.awt.Color;
-import java.awt.GridLayout;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,13 +12,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import mampos.Utils;
 import rendering.Planta;
 import rendering.ProjectionSpace;
-import rendering.Room;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -135,6 +124,7 @@ public class MainFrame extends javax.swing.JFrame {
         unitsButton = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         floor = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -231,6 +221,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
 
+        jSplitPane1.setAlignmentX(0.5F);
+        jSplitPane1.setAlignmentY(0.5F);
         jSplitPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jSplitPane1.setDoubleBuffered(true);
 
@@ -251,15 +243,27 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout floorLayout = new javax.swing.GroupLayout(floor);
         floor.setLayout(floorLayout);
         floorLayout.setHorizontalGroup(
             floorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(floorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(floorLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         floorLayout.setVerticalGroup(
             floorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1032, Short.MAX_VALUE)
+            .addGroup(floorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(floorLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1032, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jSplitPane1.setLeftComponent(floor);
@@ -276,7 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(432, Short.MAX_VALUE)
+                .addContainerGap(119, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addGap(318, 318, 318))
         );
@@ -444,6 +448,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;

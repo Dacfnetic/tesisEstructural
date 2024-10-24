@@ -13,21 +13,22 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import javafx.scene.layout.Background;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import rendering.Perfil;
 import rendering.Planta;
-
+import rendering.ProjectionSpace;
 
 public class Interfaz implements ComponentListener{
     
-    
     private GLCanvas myCanvas;
     private GLCanvas myCanvas2;
+    private GLCanvas myCanvas3;
     private Planta floorSpace;
     
     public static JPanel verde = new JPanel();
     private JPanel rojo =  new JPanel();
+    private JPanel azul =  new JPanel();
     
     public void desplegar(){
         
@@ -35,11 +36,21 @@ public class Interfaz implements ComponentListener{
         floorSpace.setDimension(-10f, 10f, 10f, -10f);
         ControladorDeEscena.setDimension(-10f, 10f, 10f, -10f);
         
+        ProjectionSpace plainRedCube = new ProjectionSpace();	
+        
+        Perfil perfil = new Perfil();	
+        
         myCanvas = floorSpace.myCanvas;
+        myCanvas2 = plainRedCube.myCanvas2;
+        myCanvas3 = perfil.myCanvas;
         
         Animator animtr = new Animator(myCanvas);
         animtr.start();
-        
+        Animator animtr2 = new Animator(myCanvas2);
+        animtr2.start();
+        Animator animtr3 = new Animator(myCanvas3);
+        animtr3.start();
+          
         components.Objects.currentStory = Objects.stories.get(0);
         
         //currentLevel.setText("Nivel: " + components.Objects.currentStory.name);
@@ -52,47 +63,38 @@ public class Interfaz implements ComponentListener{
         CControl control = new CControl(frame);
         
         frame.setLayout(new GridLayout(1,1));
-        frame.add( control.getContentArea());
+        frame.add(control.getContentArea());
         
-        SingleCDockable red = create("Red", Color.RED, rojo);
-        SingleCDockable green = create("Green", Color.GREEN, verde);
-        
+        SingleCDockable red = create("Red", Color.RED, rojo, myCanvas2);
+        SingleCDockable green = create("Green", Color.GREEN, verde, myCanvas);
+        SingleCDockable blue = create("Blue", Color.BLUE, azul, myCanvas3);
         
         control.addDockable(red);
         green.setLocation( CLocation.base().normalEast(0.5));
         control.addDockable(green);
-        
-        
+        green.setLocation( CLocation.base().normalEast(0.5));
+        control.addDockable(blue);
+         
         red.setVisible(true);
              
         green.setVisible(true);
         
+        blue.setVisible(true);
+        
         frame.setVisible(true);
+        
         green.intern().getComponent().repaint();
-        CLocation i = green.getBaseLocation();
-        System.out.println(green.intern().getComponent().getX());
-        System.out.println(green.intern().getComponent().getY());
-        System.out.println(green.intern().getComponent().getWidth());
-        System.out.println(control.getCDockable(0));
-        System.out.println(control.getCDockableCount());
-        
-   
-        System.out.println(verde.getX());
-        System.out.println(verde.getY());
-        System.out.println(verde.getWidth());
-        System.out.println(verde.getHeight());
-        
-        
-    }
+
+    }  
     
     public void change(){
         floorSpace.changeSize();
     }
-    public SingleCDockable create(String title, Color color, JPanel background){
+    public SingleCDockable create(String title, Color color, JPanel background, GLCanvas canvas){
         
         background.setOpaque(true);
         background.setBackground(color);
-        background.add(myCanvas);
+        background.add(canvas);
        
         return new DefaultSingleCDockable(title, title, background);
     }

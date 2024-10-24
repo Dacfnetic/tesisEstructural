@@ -32,7 +32,7 @@ public class Plane extends Objeto{
         vertex.clear();
         
         float[] vertices = {
-            l,z,t,  l,z,b,  r,z,t,  r,z,t, l,z,b, r,z,b
+            l,z,t, l,z,b,  r,z,t,  r,z,t, l,z,b, r,z,b
         };
         for(int i = 0; i < vertices.length; i++){
             vertex.add(vertices[i]);
