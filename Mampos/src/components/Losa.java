@@ -13,10 +13,10 @@ public class Losa extends Objeto{
         vertex.clear();
         
         float[] vertices = {
-            -0.5f, 0.5f, 0,
-            -0.5f, -0.5f, 0,
-            0.5f, -0.5f, 0,
-            0.5f, 0.5f, 0
+            -0.5f, 0.0f, 0.5f,
+            -0.5f, 0.0f, -0.5f, 
+            0.5f, -0.0f, 0.5f, 
+            0.5f, -0.0f, -0.5f
         };
         
         int[] indices = {

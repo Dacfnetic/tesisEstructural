@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import mampos.Utils;
+import rendering.Perfil;
 import rendering.Planta;
 import rendering.ProjectionSpace;
 
@@ -73,8 +74,10 @@ public class MainFrame extends javax.swing.JFrame {
         Animator animtr2 = new Animator(myCanvas2);
         animtr2.start();*/
        
-        ProjectionSpace plainRedCube = new ProjectionSpace();	
-        myCanvas2 = plainRedCube.myCanvas2;
+        //ProjectionSpace plainRedCube = new ProjectionSpace();	
+        Perfil perfil = new Perfil();
+        //myCanvas2 = plainRedCube.myCanvas2;
+        myCanvas2 = perfil.myCanvas;
         jPanel2.add(myCanvas2);
         
         Animator animtr2 = new Animator(myCanvas2);

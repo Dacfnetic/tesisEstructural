@@ -4,18 +4,15 @@ import org.joml.Matrix4f;
 import static com.jogamp.opengl.GL4.*;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.*;
-import static com.jogamp.opengl.GL.GL_FRONT_AND_BACK;
 import static com.jogamp.opengl.GL.GL_TRIANGLES;
-import static com.jogamp.opengl.GL2GL3.GL_LINE;
 import com.jogamp.opengl.awt.GLCanvas;
 import components.ControladorDeAnclaje;
 import components.ControladorDeCotas;
 import components.ControladorDeEscena;
 import components.ControladorDeLineas;
+import components.ControladorDeLosas;
 import components.ControladorDeMuros;
 import components.ControladorDePlanos;
-import frames.Interfaz;
-import frames.MainFrame;
 import java.awt.event.*;
 import java.nio.FloatBuffer;
 import java.util.logging.Level;
@@ -76,6 +73,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         
         // 003. Se generan los array donde se almacenarán los buffers para enviar a la GPU.
         gl.glGenVertexArrays(vao.length,  vao, 0);
+      
         // 004. Se activa el array a utilizar para este canvas.
     	gl.glBindVertexArray(vao[0]);
         // 005. Se generan los arrays donde se almacenarán las propiedades a renderizar.
@@ -98,13 +96,13 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     public void display(GLAutoDrawable drawable){
         
         GL4 gl = (GL4)GLContext.getCurrentGL();
-        changeSize();
+       
         gl.glPointSize(30f);
         //gl.glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         // 006. Se limpia el canvas en cada frame.
         gl.glClear(GL_DEPTH_BUFFER_BIT);
         gl.glClear(GL_COLOR_BUFFER_BIT);
-        gl.glClearColor(1.0f,1.0f,1.0f,1.0f);
+        gl.glClearColor(1.0f,1.0f,0.0f,1.0f);
         // 007
         mvLoc = gl.glGetUniformLocation(renderingProgram, "mv_matrix");
         // 008
@@ -129,12 +127,17 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         
         // 020. Se renderizan los objetos en la escena.
         Controlador.dibujar("v",gl, vbo, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
+        /*
         Controlador.dibujar("v",gl, vbo, 0, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
         Controlador.dibujar("v",gl, vbo, 3, brickTexture, ControladorDeLineas.lineas, 2, GL_LINES); 
         
         Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
         ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
         if(ControladorDeEscena.drawSnap) ControladorDeAnclaje.drawOsnap(gl, vbo, ControladorDeEscena.worldX, ControladorDeEscena.worldZ, oLoc);
+    */
+        Controlador.dibujar("v",gl,vbo,0,brickTexture,ControladorDeLosas.losas,6,GL_TRIANGLE_STRIP);
+    
+    
     }
          
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height){
