@@ -9,11 +9,7 @@ import components.Objects;
 import components.Plane;
 import dibujo.Linea;
 import frames.Interfaz;
-import frames.MainFrame;
 import java.awt.EventQueue;
-import optimization.Optimizar;
-import rendering.Loader;
-import rendering.Renderer;
 import units.Longitud;
 
 public class Mampos {
