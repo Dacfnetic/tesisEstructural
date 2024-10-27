@@ -87,11 +87,8 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
       	mvMat.mul(mMat);
         gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
         
-        
-        
-        Controlador.dibujar("v",gl, vbo, 1, brickTexture,ControladorDePlanos.planos, 6, GL_TRIANGLES);
-        Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture,ControladorDePlanos.planos, 6, GL_TRIANGLES);
-        Controlador.dibujar("v",gl, vbo, 0, brickTexture,ControladorDeMuros.muros, 36, GL_TRIANGLES);
+        Controlador.dibujar("v",gl, vbo, 2, 3, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
+        Controlador.dibujar("v",gl, vbo, 0, 1, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
         //ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
     }
     
@@ -165,7 +162,6 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
   
         if(e.getKeyCode() == KeyEvent.VK_W) {
             System.out.println("moverse hacia adelante en perspectiva");
-        
             viewMatrix.translateLocal(0.0f, -1.0f, 0.0f);
         }
         if(e.getKeyCode() == KeyEvent.VK_S) {

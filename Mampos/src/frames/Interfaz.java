@@ -42,14 +42,14 @@ public class Interfaz implements ComponentListener{
         
         myCanvas = floorSpace.myCanvas;
         myCanvas2 = plainRedCube.myCanvas2;
-        myCanvas3 = perfil.myCanvas;
+        //myCanvas3 = perfil.myCanvas;
         
         Animator animtr = new Animator(myCanvas);
         animtr.start();
         Animator animtr2 = new Animator(myCanvas2);
         animtr2.start();
-        Animator animtr3 = new Animator(myCanvas3);
-        animtr3.start();
+        //Animator animtr3 = new Animator(myCanvas3);
+        //animtr3.start();
           
         components.Objects.currentStory = Objects.stories.get(0);
         
@@ -67,19 +67,19 @@ public class Interfaz implements ComponentListener{
         
         SingleCDockable red = create("Red", Color.RED, rojo, myCanvas2);
         SingleCDockable green = create("Green", Color.GREEN, verde, myCanvas);
-        SingleCDockable blue = create("Blue", Color.BLUE, azul, myCanvas3);
+        //SingleCDockable blue = create("Blue", Color.BLUE, azul, myCanvas3);
         
         control.addDockable(red);
         green.setLocation( CLocation.base().normalEast(0.5));
         control.addDockable(green);
         green.setLocation( CLocation.base().normalEast(0.5));
-        control.addDockable(blue);
+       // control.addDockable(blue);
          
         red.setVisible(true);
              
         green.setVisible(true);
         
-        blue.setVisible(true);
+       // blue.setVisible(true);
         
         frame.setVisible(true);
         

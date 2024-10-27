@@ -139,21 +139,23 @@ public abstract class Controlador {
   
 
 
-    public static void dibujar(String tipo, GL4 gl, int[] vbo, int vboIndex, int brickTexture, List lista, int verticesDeObjeto, int mode) {  
-    	if(tipo  == "v"){
-            crearBufferDeVertices(gl, vbo, lista, vboIndex);
-            prepararBufferDeVertices(gl, brickTexture, verticesDeObjeto, lista.size(), mode);
-        }
-        if(tipo  == "t"){
-            crearBufferDeTexturas(gl, vbo, lista, vboIndex);
-            prepararBufferDeTexturas(gl, brickTexture, verticesDeObjeto, lista.size(), mode);
-        }
-        if(tipo  == "i"){
-            crearBufferDeVerticesF(gl, vbo, lista, vboIndex);
-            prepararBufferDeVerticesF(gl, brickTexture, verticesDeObjeto, lista.size(), mode);
-        }
-     
-        
+    public static void dibujar(String tipo, GL4 gl, int[] vbo, int vboIndex, int vboIndexT, int texture, List lista, int verticesDeObjeto, int mode) {  
+    	if(lista.size() > 0){
+            if(tipo  == "v"){
+                crearBufferDeVertices(gl, vbo, lista, vboIndex);
+                prepararBufferDeVertices(gl, texture, verticesDeObjeto, lista.size(), mode);
+                crearBufferDeTexturas(gl, vbo, lista, vboIndexT);
+                prepararBufferDeTexturas(gl, texture, 2*verticesDeObjeto/3, lista.size(), mode);
+            }
+            if(tipo  == "t"){
+                crearBufferDeTexturas(gl, vbo, lista, vboIndex);
+                prepararBufferDeTexturas(gl, texture, verticesDeObjeto, lista.size(), mode);
+            }
+            if(tipo  == "i"){
+                crearBufferDeVerticesF(gl, vbo, lista, vboIndex);
+                prepararBufferDeVerticesF(gl, texture, verticesDeObjeto, lista.size(), mode);
+            }
+        }  
     }
     
     

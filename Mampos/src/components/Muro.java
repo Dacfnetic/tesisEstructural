@@ -8,17 +8,11 @@ import rendering.Objeto;
 //@author Diego
 public class Muro extends Objeto{
     
-    public Punto puntos[];
-    public Punto esquinas[];
-    public Punto aristas[];
-    public Punto centros[];
-    
     public Vec3f point1 = new Vec3f(0.0f, 0.0f, 0.0f);
     public Vec3f point2 = new Vec3f(0.0f, 0.0f, 0.0f);
  
-    public float h = 1.0f;
-    public float n = 0.0f;
-    public float t = 0.14f;
+    public float h = 3.0f;
+    public float t = 0.20f;
  	
     public float largo;
 	
@@ -36,7 +30,7 @@ public class Muro extends Objeto{
     }
 
     public void setVertexlikeMidWall() {
-        
+        uv.clear();
         vertex.clear();
 
         float deltaX = this.point2.x() - this.point1.x();
@@ -61,7 +55,6 @@ public class Muro extends Objeto{
         Vec3f t2v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle, point2.y() - (t/2.0f) * cosAngle,  point2.z());
         Vec3f t2v3 = t1v2;
 
-
         Vec3f t3v1 = new Vec3f(point1.x() - (t/2.0f) * sinAngle, point1.y() + (t/2.0f) * cosAngle, point1.z());
         Vec3f t3v2 = new Vec3f(point2.x() - (t/2.0f) * sinAngle, point2.y() + (t/2.0f) * cosAngle, point2.z()+h);
         Vec3f t3v3 = new Vec3f(point1.x() - (t/2.0f) * sinAngle, point1.y() + (t/2.0f) * cosAngle, point1.z()+h);
@@ -70,16 +63,13 @@ public class Muro extends Objeto{
         Vec3f t4v2 = new Vec3f(point2.x() - (t/2.0f) * sinAngle, point2.y() + (t/2.0f) * cosAngle, point2.z());
         Vec3f t4v3 = t3v2;
 
-
         Vec3f t5v1 = t1v1;
         Vec3f t5v2 = t1v3;
         Vec3f t5v3 = t3v1;
 
-
         Vec3f t6v1 = t3v1;
         Vec3f t6v2 = t1v3;
         Vec3f t6v3 = t3v3;
-
 
         Vec3f t7v1 = t2v2;
         Vec3f t7v2 = t2v3;
@@ -105,7 +95,6 @@ public class Muro extends Objeto{
         Vec3f t12v2 = t1v3;
         Vec3f t12v3 = t3v2;
         
-        
         float[] vertices = {
             t1v1.x(), t1v1.y(), t1v1.z(),			t1v2.x(), t1v2.y(), t1v2.z(),	 		t1v3.x(), t1v3.y(), t1v3.z(),	
             t2v1.x(), t2v1.y(), t2v1.z(),			t2v2.x(), t2v2.y(), t2v2.z(),	 		t2v3.x(), t2v3.y(), t2v3.z(),
@@ -118,16 +107,31 @@ public class Muro extends Objeto{
             t9v1.x(), t9v1.y(), t9v1.z(),			t9v2.x(), t9v2.y(), t9v2.z(),	 		t9v3.x(), t9v3.y(), t9v3.z(),	
             t10v1.x(), t10v1.y(), t10v1.z(),			t10v2.x(), t10v2.y(), t10v2.z(),	 		t10v3.x(), t10v3.y(), t10v3.z(),
             t11v1.x(), t11v1.y(), t11v1.z(),			t11v2.x(), t11v2.y(), t11v2.z(),	 		t11v3.x(), t11v3.y(), t11v3.z(),	
-            t12v1.x(), t12v1.y(), t12v1.z(),			t12v2.x(), t12v2.y(), t12v2.z(),	 		t12v3.x(), t12v3.y(), t12v3.z(),	
+            t12v1.x(), t12v1.y(), t12v1.z(),			t12v2.x(), t12v2.y(), t12v2.z(),	 		t12v3.x(), t12v3.y(), t12v3.z()
+        };
+        
+        float[] uvs = {
+            t1v1.x(), t1v1.y(), 			t1v2.x(), t1v2.y(), 	 		t1v3.x(), t1v3.y(), 	
+            t2v1.x(), t2v1.y(), 			t2v2.x(), t2v2.y(),                     t2v3.x(), t2v3.y(), 
+            t3v1.x(), t3v1.y(), 			t3v2.x(), t3v2.y(), 	 		t3v3.x(), t3v3.y(), 
+            t4v1.x(), t4v1.y(), 			t4v2.x(), t4v2.y(), 	 		t4v3.x(), t4v3.y(), 
+            t5v1.x(), t5v1.y(), 			t5v2.x(), t5v2.y(), 	 		t5v3.x(), t5v3.y(), 
+            t6v1.x(), t6v1.y(), 			t6v2.x(), t6v2.y(), 	 		t6v3.x(), t6v3.y(), 
+            t7v1.x(), t7v1.y(), 			t7v2.x(), t7v2.y(), 	 		t7v3.x(), t7v3.y(), 	
+            t8v1.x(), t8v1.y(), 			t8v2.x(), t8v2.y(), 	 		t8v3.x(), t8v3.y(), 
+            t9v1.x(), t9v1.y(), 			t9v2.x(), t9v2.y(), 	 		t9v3.x(), t9v3.y(), 	
+            t10v1.x(), t10v1.y(),                       t10v2.x(), t10v2.y(),	 		t10v3.x(), t10v3.y(), 
+            t11v1.x(), t11v1.y(), 			t11v2.x(), t11v2.y(), 	 		t11v3.x(), t11v3.y(), 	
+            t12v1.x(), t12v1.y(), 			t12v2.x(), t12v2.y(), 	 		t12v3.x(), t12v3.y()
         };
         
         for(int i = 0; i < vertices.length; i++){
             vertex.add(vertices[i]);
         }
-    }
-
-    public void calculateVertex(){
         
+        for(int i = 0; i < uvs.length; i++){
+            uv.add(uvs[i]);
+        }
     }
     
     public void setVertexlikeExteriorWall() {

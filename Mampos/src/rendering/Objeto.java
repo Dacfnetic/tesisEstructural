@@ -10,7 +10,8 @@ public abstract class Objeto {
     public List<Float> uv = new ArrayList<>();
     
     private int vaoID;
-
+    private int vertexCount;
+    
     public int getVaoID() {
         return vaoID;
     }
@@ -26,8 +27,5 @@ public abstract class Objeto {
     public void setVertexCount(int vertexCount) {
         this.vertexCount = vertexCount;
     }
-    private int vertexCount;
-    
-    
     
 }
