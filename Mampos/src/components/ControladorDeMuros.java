@@ -42,16 +42,16 @@ public class ControladorDeMuros extends Controlador {
         }
         if(contadorDeClicks == 0) {           
             x1 = ControladorDeEscena.worldX;
-            y1 = ControladorDeEscena.worldZ; 
+            y1 = ControladorDeEscena.worldY; 
             z1 = components.Objects.currentStory.lowerStoryHeight;           
         }
         
         if(contadorDeClicks > 0) {
             x2 = ControladorDeEscena.worldX;
-            y2 = ControladorDeEscena.worldZ; 
+            y2 = ControladorDeEscena.worldY; 
             comprobarOrtogonalidad();
             Muro nuevoMuro = new Muro();
-            nuevoMuro.setPoints(new Vec3f(x1, z1, y1), new Vec3f(x2, z2, y2));
+            nuevoMuro.setPoints(new Vec3f(x1, y1, z1), new Vec3f(x2, y2, z2));
             setearVerticesDeMuroSegunForma(nuevoMuro);
             muros.add(nuevoMuro);
             
@@ -60,7 +60,7 @@ public class ControladorDeMuros extends Controlador {
             //ControladorDeCotas.agregarCotaACotas(nuevaCota);
             if(isChain){
                 x1 = nuevoMuro.point2.x();
-                y1 = nuevoMuro.point2.z(); 
+                y1 = nuevoMuro.point2.y(); 
                 z1 = components.Objects.currentStory.lowerStoryHeight;
                 components.Objects.rellenarVertices();
             } else {
@@ -83,9 +83,9 @@ public class ControladorDeMuros extends Controlador {
     
     public static void comprobarOrtogonalidad(){    
         float deltaX = Math.abs(x2 - x1);
-        float deltaZ = Math.abs(y2 - y1);
+        float deltaY = Math.abs(y2 - y1);
         if(isOrtho){
-            if(deltaX >= deltaZ){
+            if(deltaX >= deltaY){
                 y2 = y1;
             } else {
                 x2 = x1;
@@ -134,7 +134,7 @@ public class ControladorDeMuros extends Controlador {
                 crearMuroPorDistanciaYClick();
             }
             comprobarOrtogonalidad();
-            temporal.setPoints(new Vec3f(x1, z1, y1), new Vec3f(x2, z2, y2));        
+            temporal.setPoints(new Vec3f(x1, y1, z1), new Vec3f(x2, y2, z2));        
             setearVerticesDeMuroSegunForma(temporal);
             //ControladorDeCotas.dibujarCotaDeMuroTemporal(temporal);
             muros.add(temporal);
@@ -143,7 +143,7 @@ public class ControladorDeMuros extends Controlador {
     
     private static void crearMuroPorClick() { 
         x2 = ControladorDeEscena.worldX;
-        y2 = ControladorDeEscena.worldZ; 
+        y2 = ControladorDeEscena.worldY; 
     }
     
     private static void crearMuroPorDistanciaYClick() {

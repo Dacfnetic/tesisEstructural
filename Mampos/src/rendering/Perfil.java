@@ -44,7 +44,7 @@ public class Perfil implements GLEventListener {
         gl.glClearColor(1.0f,0.0f,0.0f,1.0f);
         // 020. Se renderizan los objetos en la escena.
        
-        Controlador.dibujar("i",gl,vbo,0,0,ControladorDeLosas.losas,6,GL_TRIANGLES);
+        //Controlador.dibujar("i",gl,vbo,0,0,ControladorDeLosas.losas,6,GL_TRIANGLES);
    }
          
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height){}

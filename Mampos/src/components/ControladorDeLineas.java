@@ -48,29 +48,29 @@ public class ControladorDeLineas extends Controlador {
             if(clicks == 0) {     
                 // Se setean las coordenadas
                 x1 = ControladorDeEscena.worldX;
-                z1 = ControladorDeEscena.worldZ; 
-                y1 = components.Objects.currentStory.lowerStoryHeight;
-                lineaTemporal.setPunto1(x1, z1, y1);
+                y1 = ControladorDeEscena.worldY;
+                z1 = components.Objects.currentStory.lowerStoryHeight;
+                lineaTemporal.setPunto1(x1, y1, z1);
                 ControladorDeEscena.setContadorDeClicks(clicks + 1);
             }
             // Si ya no es el primer click luego de la activación de la herramienta.
             if(clicks > 0) {
                 // Se setean las coordenadas
                 x2 = ControladorDeEscena.worldX;
-                z2 = ControladorDeEscena.worldZ; 
+                y2 = ControladorDeEscena.worldY; 
                 comprobarOrtogonalidad();
                 
                 Linea nuevaLinea = new Linea();
-                nuevaLinea.setPunto1(x1, z1, y1);
-                nuevaLinea.setPunto2(x2, z2, y2);
+                nuevaLinea.setPunto1(x1, y1, z1);
+                nuevaLinea.setPunto2(x2, y2, z2);
                 nuevaLinea.setVertices(); 
                 // Se agrega la nueva linea
                 lineas.add(nuevaLinea);
                 // Si la opción de cadena está activada
                 if(isChain){
                     x1 = x2;
-                    z1 = z2;
                     y1 = y2;
+                    z1 = z2; 
                     ControladorDeEscena.setContadorDeClicks(clicks + 1);
                 } else {  
                     // Los clicks vuelven a ser cero
@@ -92,15 +92,15 @@ public class ControladorDeLineas extends Controlador {
     
     public static void comprobarOrtogonalidad(){    
         float deltaX = Math.abs(x2 - x1);
-        float deltaZ = Math.abs(z2 - z1);
+        float deltaY = Math.abs(y2 - y1);
         if(isOrtho){
-            if(deltaX >= deltaZ){
-                z2 = z1;
+            if(deltaX >= deltaY){
+                y2 = y1;
             } else {
                 x2 = x1;
             }  
         }
-        y2 = components.Objects.currentStory.lowerStoryHeight;
+        z2 = components.Objects.currentStory.lowerStoryHeight;
     }
 
     public static void comprobarAnclaje(){

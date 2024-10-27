@@ -21,7 +21,7 @@ import org.joml.Matrix4f;
 public class Room {
 
     private GLCanvas myCanvas;
-    private Loader loader;
+
     private Renderer renderer;
     
     private RawModel model;
@@ -33,7 +33,7 @@ public class Room {
     public Room(){}
     
     public void init(GLAutoDrawable drawable){
-        loader = new Loader();
+     
         renderer = new Renderer();
         float[] vertices = {
         -0.5f, 0.5f, 0f,
@@ -45,7 +45,6 @@ public class Room {
         -0.5f,0.5f, 0f
         };
     
-        model = loader.loadToVAO(vertices);
     }
     
     public void display(GLAutoDrawable drawable){
@@ -55,7 +54,7 @@ public class Room {
     
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height){}
     public void dispose(GLAutoDrawable drawable){
-        loader.cleanUp();
+       
     }
 
     

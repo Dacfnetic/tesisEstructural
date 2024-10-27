@@ -81,11 +81,8 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         // 006. Se determina que programa se usará en este canvas.
         gl.glUseProgram(renderingProgram);
         
-    	cameraX	= 0.0f;	cameraY	= 0.0f;	cameraZ	= 0.1f;
-        vMat.translate(-cameraX, -cameraY, -cameraZ);
-        vMat.rotate(6*(float) (Math.PI/12),1.0f,0.0f,0.0f);
-        
-        
+    	cameraX = 0; cameraY = 0; cameraZ = 20;
+        vMat.translation(cameraX, cameraY, -cameraZ);
         
     }
     
@@ -110,7 +107,8 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         // 009
         oLoc = gl.glGetUniformLocation(renderingProgram, "osnap");
      
-      	pMat.setOrtho(this.left, this.right, this.top, this.bottom, 0.1f, 5f);
+      	pMat.setOrtho(this.left, this.right, this.top, this.bottom, 0.1f, 20f);
+        
         gl.glUniformMatrix4fv(pLoc, 1, false, pMat.get(vals));
         gl.glUniform1i(oLoc, 0);
         
@@ -127,21 +125,19 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         
         // 020. Se renderizan los objetos en la escena.
         Controlador.dibujar("v",gl, vbo, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
-        /*
         Controlador.dibujar("v",gl, vbo, 0, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
-        Controlador.dibujar("v",gl, vbo, 3, brickTexture, ControladorDeLineas.lineas, 2, GL_LINES); 
+       // Controlador.dibujar("v",gl, vbo, 3, brickTexture, ControladorDeLineas.lineas, 2, GL_LINES); 
         
-        Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
-        ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
-        if(ControladorDeEscena.drawSnap) ControladorDeAnclaje.drawOsnap(gl, vbo, ControladorDeEscena.worldX, ControladorDeEscena.worldZ, oLoc);
-    */
-        Controlador.dibujar("v",gl,vbo,0,brickTexture,ControladorDeLosas.losas,6,GL_TRIANGLE_STRIP);
+       // Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
+        //ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
+        //if(ControladorDeEscena.drawSnap) ControladorDeAnclaje.drawOsnap(gl, vbo, ControladorDeEscena.worldX, ControladorDeEscena.worldZ, oLoc);
+        //Controlador.dibujar("v",gl,vbo,0,brickTexture,ControladorDeLosas.losas,6,GL_TRIANGLE_STRIP);
     
     
     }
          
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height){
-        changeSize();
+
     }
     
     public void dispose(GLAutoDrawable drawable){}

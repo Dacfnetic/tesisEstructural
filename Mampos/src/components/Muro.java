@@ -16,7 +16,7 @@ public class Muro extends Objeto{
     public Vec3f point1 = new Vec3f(0.0f, 0.0f, 0.0f);
     public Vec3f point2 = new Vec3f(0.0f, 0.0f, 0.0f);
  
-    public float z = 1.0f;
+    public float h = 1.0f;
     public float n = 0.0f;
     public float t = 0.14f;
  	
@@ -40,9 +40,9 @@ public class Muro extends Objeto{
         vertex.clear();
 
         float deltaX = this.point2.x() - this.point1.x();
-        float deltaZ = this.point2.z() - this.point1.z();
+        float deltaY = this.point2.y() - this.point1.y();
 
-        float angle = (float) Math.atan(deltaZ/deltaX);
+        float angle = (float) Math.atan(deltaY/deltaX);
         float sinAngle = (float) Math.sin(angle);
         float cosAngle = (float) Math.cos(angle);
 
@@ -51,23 +51,23 @@ public class Muro extends Objeto{
             cosAngle = -cosAngle;
         }
 
-        largo = (float) Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaZ, 2));
+        largo = (float) Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         
-        Vec3f t1v1 = new Vec3f(point1.x() + (t/2.0f) * sinAngle, -point1.y(),  point1.z() - (t/2.0f) * cosAngle);
-        Vec3f t1v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle, -point2.y() - z, point2.z() - (t/2.0f) * cosAngle);
-        Vec3f t1v3 = new Vec3f(point1.x() + (t/2.0f) * sinAngle, -point1.y() - z, point1.z() - (t/2.0f) * cosAngle);
+        Vec3f t1v1 = new Vec3f(point1.x() + (t/2.0f) * sinAngle,  point1.y() - (t/2.0f) * cosAngle, point1.z());
+        Vec3f t1v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle, point2.y() - (t/2.0f) * cosAngle, point2.z() + h);
+        Vec3f t1v3 = new Vec3f(point1.x() + (t/2.0f) * sinAngle, point1.y() - (t/2.0f) * cosAngle, point1.z() + h);
         
         Vec3f t2v1 = t1v1;
-        Vec3f t2v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle,  -point2.y(), point2.z() - (t/2.0f) * cosAngle);
+        Vec3f t2v2 = new Vec3f(point2.x() + (t/2.0f) * sinAngle, point2.y() - (t/2.0f) * cosAngle,  point2.z());
         Vec3f t2v3 = t1v2;
 
 
-        Vec3f t3v1 = new Vec3f(point1.x() - (t/2.0f) * sinAngle, -point1.y(),  point1.z() + (t/2.0f) * cosAngle);
-        Vec3f t3v2 = new Vec3f(point2.x() - (t/2.0f) * sinAngle, -point2.y()-z, point2.z() + (t/2.0f) * cosAngle);
-        Vec3f t3v3 = new Vec3f(point1.x() - (t/2.0f) * sinAngle, -point1.y()-z, point1.z() + (t/2.0f) * cosAngle);
+        Vec3f t3v1 = new Vec3f(point1.x() - (t/2.0f) * sinAngle, point1.y() + (t/2.0f) * cosAngle, point1.z());
+        Vec3f t3v2 = new Vec3f(point2.x() - (t/2.0f) * sinAngle, point2.y() + (t/2.0f) * cosAngle, point2.z()+h);
+        Vec3f t3v3 = new Vec3f(point1.x() - (t/2.0f) * sinAngle, point1.y() + (t/2.0f) * cosAngle, point1.z()+h);
 
         Vec3f t4v1 = t3v1;
-        Vec3f t4v2 = new Vec3f(point2.x() - (t/2.0f) * sinAngle, -point2.y(), point2.z() + (t/2.0f) * cosAngle);
+        Vec3f t4v2 = new Vec3f(point2.x() - (t/2.0f) * sinAngle, point2.y() + (t/2.0f) * cosAngle, point2.z());
         Vec3f t4v3 = t3v2;
 
 
@@ -148,16 +148,16 @@ public class Muro extends Objeto{
         largo = (float) Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaZ, 2));
 
         Vec3f t1v1 = new Vec3f(point1.x(), -point1.y(),  point1.z());
-        Vec3f t1v2 = new Vec3f(point2.x(), -point2.y() - z, point2.z());
-        Vec3f t1v3 = new Vec3f(point1.x(), -point1.y() - z, point1.z());
+        Vec3f t1v2 = new Vec3f(point2.x(), -point2.y() - h, point2.z());
+        Vec3f t1v3 = new Vec3f(point1.x(), -point1.y() - h, point1.z());
 
         Vec3f t2v1 = t1v1;
         Vec3f t2v2 = new Vec3f(point2.x(),  -point2.y(), point2.z());
         Vec3f t2v3 = t1v2;
 
         Vec3f t3v1 = new Vec3f(point1.x() - (t) * sinAngle, -point1.y(),  point1.z() + (t) * cosAngle);
-        Vec3f t3v2 = new Vec3f(point2.x() - (t) * sinAngle, -point2.y()-z, point2.z() + (t) * cosAngle);
-        Vec3f t3v3 = new Vec3f(point1.x() - (t) * sinAngle, -point1.y()-z, point1.z() + (t) * cosAngle);
+        Vec3f t3v2 = new Vec3f(point2.x() - (t) * sinAngle, -point2.y()-h, point2.z() + (t) * cosAngle);
+        Vec3f t3v3 = new Vec3f(point1.x() - (t) * sinAngle, -point1.y()-h, point1.z() + (t) * cosAngle);
 
         Vec3f t4v1 = t3v1;
         Vec3f t4v2 = new Vec3f(point2.x() - (t) * sinAngle, -point2.y(), point2.z() + (t) * cosAngle);
@@ -220,10 +220,10 @@ public class Muro extends Objeto{
     public void flipVertexlikeExteriorWall() {}
 
     public void setParametros(float pesoUnitarioBlock) {
-        System.out.println("Altura: " + this.z + " m");
+        System.out.println("Altura: " + this.h + " m");
         System.out.println("Largo: " + this.largo + " m");
         System.out.println("Ancho: " + this.t + " m");
-        this.areaTotal = this.z * this.largo;
+        this.areaTotal = this.h * this.largo;
         System.out.println("Área total: " + this.areaTotal + " m²");
         this.cantidadDeBlocks = this.areaTotal * 12.5f;	
         System.out.println("Cantidad de block: " + this.cantidadDeBlocks + " blocks");

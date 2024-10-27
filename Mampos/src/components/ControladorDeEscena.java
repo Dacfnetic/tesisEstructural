@@ -76,11 +76,11 @@ public abstract class ControladorDeEscena extends Controlador{
         float screenXCoordinates = ((2f * screenX/canvasX) - 1f);
         worldX = (screenXCoordinates * perUnitX) - (planta.cameraCurrentX);
 
-        float perUnitZ = (ControladorDeEscena.top - ControladorDeEscena.bottom)/2;
+        float perUnitY = (ControladorDeEscena.top - ControladorDeEscena.bottom)/2;
         float screenY = e.getY();
         float canvasY = planta.myCanvas.getHeight();
         float screenYCoordinates = -((2f * screenY/canvasY) - 1f); 
-        worldZ = (screenYCoordinates * perUnitZ) + (planta.cameraCurrentY); 
+        worldY = (screenYCoordinates * perUnitY) + (planta.cameraCurrentY); 
     }
     
     public static void controlesEnPlanta(Planta planta, KeyEvent e){
@@ -95,8 +95,8 @@ public abstract class ControladorDeEscena extends Controlador{
         if(e.getKeyCode() == KeyEvent.VK_C) isChain = !isChain;
         if(e.getKeyCode() == KeyEvent.VK_M) usandoHerramientaMuro.setEstado(true);
         if(e.getKeyCode() == KeyEvent.VK_L) usandoHerramientaLinea.setEstado(true);
-        if(e.getKeyCode() == KeyEvent.VK_W) vMat.translate(0.0f, 0.0f, -0.1f); // System.out.println("moverse hacia adelante en perspectiva");
-        if(e.getKeyCode() == KeyEvent.VK_S) vMat.translate(0.0f, 0.0f, 0.1f); // System.out.println("moverse hacia atras en perspectiva");   
+        if(e.getKeyCode() == KeyEvent.VK_W) vMat.translate(0.0f, 0.1f, 0.0f); // System.out.println("moverse hacia adelante en perspectiva");
+        if(e.getKeyCode() == KeyEvent.VK_S) vMat.translate(0.0f, -0.1f, 0.0f); // System.out.println("moverse hacia atras en perspectiva");   
         if(e.getKeyCode() == KeyEvent.VK_D) vMat.translate(-0.1f, 0.0f, 0.0f);  //System.out.println("moverse a la derecha en perspectiva");  
         if(e.getKeyCode() == KeyEvent.VK_A) vMat.translate(0.1f, 0.0f, 0.0f); //System.out.println("moverse a la izquierda en perspectiva");        
         if(e.getKeyCode() == KeyEvent.VK_Z) { // System.out.println("Zoom");
