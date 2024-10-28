@@ -18,6 +18,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.joml.Matrix4f;
 
 public abstract class Controlador {
     
@@ -40,28 +41,6 @@ public abstract class Controlador {
         rellenarBufferDeVertices(gl, vbo, vertexPositions, vboIndex);
     }
     
-    public static void crearBufferDeVerticesF(GL4 gl, int[] vbo, List lista, int vboIndex){ 
-        iterador = lista.iterator();
-        vertices.clear();
-        indices.clear();
-        while(iterador.hasNext()){
-            Objeto objeto = (Objeto) iterador.next();
-            vertices.addAll(objeto.vertex);
-            indices.addAll(objeto.indexes);
-        }
-        double[] vertexPositions = vertices.stream().mapToDouble(f -> f).toArray();
-        int[] indexesPositions = indices.stream().mapToInt(i -> i).toArray();
-        rellenarBufferDeVerticesI(gl, vbo, indexesPositions, vboIndex);
-        rellenarBufferDeVertices(gl, vbo, vertexPositions, vboIndex);
-       
-    }
-    
-    public static void rellenarBufferDeVerticesI(GL4 gl, int[] vbo, int[] data, int vboIndex){
-        gl.glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[vboIndex]);
-        IntBuffer indexBuf = Buffers.newDirectIntBuffer(data);
-        gl.glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuf.limit()*4, indexBuf, GL_STATIC_DRAW);
-    }
-    
     public static void rellenarBufferDeVertices(GL4 gl, int[] vbo, double[] data, int vboIndex){
         gl.glBindBuffer(GL_ARRAY_BUFFER, vbo[vboIndex]);
         float[] b = new float[data.length];
@@ -72,9 +51,7 @@ public abstract class Controlador {
     
     public static void prepararBufferDeVertices(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
         // 000. Se selecciona la textura activa.
-        gl.glActiveTexture(GL_TEXTURE0);
-        // 001. Se enlaza la textura activa.
-        gl.glBindTexture(GL_TEXTURE_2D, texture);
+     
         // 000. Se le dice que cuente cada 3 datos en el buffer x, y, z.
       	gl.glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
        
@@ -86,23 +63,7 @@ public abstract class Controlador {
         gl.glDrawArrays(mode, 0, vertexQuantity * objectsQuantity);     
     }
     
-    public static void prepararBufferDeVerticesF(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
-     // 000. Se selecciona la textura activa.
-        gl.glActiveTexture(GL_TEXTURE0);
-        // 001. Se enlaza la textura activa.
-        gl.glBindTexture(GL_TEXTURE_2D, texture);
-      	gl.glVertexAttribPointer(0, 3, GL_FLOAT, false, 6, 0);
-       
-        
-        // 000. Se le dice la posicion que se debe seleccionar en el shader.
-      	gl.glEnableVertexAttribArray(0);
-        // adjust OpenGL settings and draw model
-       
-        gl.glEnable(GL_DEPTH_TEST);
-        gl.glDepthFunc(GL_LEQUAL);
-        gl.glDrawElements(mode, vertexQuantity * objectsQuantity, GL_UNSIGNED_INT, 0);     
-    }
-    
+
     public static void crearBufferDeTexturas(GL4 gl, int[] vbo, List lista, int vboIndex){ 
         iterador = lista.iterator();
         uv.clear();
@@ -118,15 +79,12 @@ public abstract class Controlador {
         gl.glBindBuffer(GL_ARRAY_BUFFER, vbo[vboIndex]);
         float[] b = new float[data.length];
         for(int i = 0; i < data.length; i++){b[i] = (float) data[i];}
-        FloatBuffer vertBuf = Buffers.newDirectFloatBuffer(b);
-        gl.glBufferData(GL_ARRAY_BUFFER, vertBuf.limit()*4, vertBuf, GL_STATIC_DRAW);
+        FloatBuffer texBuf = Buffers.newDirectFloatBuffer(b);
+        gl.glBufferData(GL_ARRAY_BUFFER, texBuf.limit()*4, texBuf, GL_STATIC_DRAW);
     }
     
     public static void prepararBufferDeTexturas(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
-        // 000. Se selecciona la textura activa.
-        gl.glActiveTexture(GL_TEXTURE0);
-        // 001. Se enlaza la textura activa.
-        gl.glBindTexture(GL_TEXTURE_2D, texture);
+        
         // 000. Se le dice que cuente cada 3 datos en el buffer x, y, z.
       	gl.glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
         // 000. Se le dice la posicion que se debe seleccionar en el shader.
@@ -139,32 +97,34 @@ public abstract class Controlador {
   
 
 
-    public static void dibujar(String tipo, GL4 gl, int[] vbo, int vboIndex, int vboIndexT, int texture, List lista, int verticesDeObjeto, int mode) {  
-    	if(lista.size() > 0){
-            if(tipo  == "v"){
-                crearBufferDeVertices(gl, vbo, lista, vboIndex);
-                prepararBufferDeVertices(gl, texture, verticesDeObjeto, lista.size(), mode);
-                crearBufferDeTexturas(gl, vbo, lista, vboIndexT);
-                prepararBufferDeTexturas(gl, texture, 2*verticesDeObjeto/3, lista.size(), mode);
-            }
-            if(tipo  == "t"){
-                crearBufferDeTexturas(gl, vbo, lista, vboIndex);
-                prepararBufferDeTexturas(gl, texture, verticesDeObjeto, lista.size(), mode);
-            }
-            if(tipo  == "i"){
-                crearBufferDeVerticesF(gl, vbo, lista, vboIndex);
-                prepararBufferDeVerticesF(gl, texture, verticesDeObjeto, lista.size(), mode);
+    public static void dibujar(GL4 gl, int[] vbo, int vboIndex, int vboIndexT, int texture, List lista, int verticesDeObjeto, int mode,
+    Matrix4f viewMatrix, Matrix4f mvMat, int mvLoc, int pLoc, int oLoc, Matrix4f pMat, FloatBuffer vals) {  
+    	if(!lista.isEmpty()){
+            iterador = lista.iterator();
+            while(iterador.hasNext()){
+                
+                vertices.clear();
+                uv.clear();
+                
+                Objeto objeto = (Objeto) iterador.next();
+                
+                vertices.addAll(objeto.vertex);
+                uv.addAll(objeto.uv);
+
+                mvMat.identity();
+                mvMat.mul(viewMatrix);
+                mvMat.mul(objeto.mMat);
+                gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
+                gl.glUniformMatrix4fv(pLoc, 1, false, pMat.get(vals));
+                gl.glUniform1i(oLoc, 0);
+                
+                double[] vertexPositions = vertices.stream().mapToDouble(f -> f).toArray();
+                double[] uvPositions = uv.stream().mapToDouble(f -> f).toArray();
+                rellenarBufferDeVertices(gl, vbo, vertexPositions, vboIndex);
+                prepararBufferDeVertices(gl, texture, verticesDeObjeto, 1, mode);
+                rellenarBufferDeTexturas(gl, vbo, uvPositions, vboIndexT);
+                prepararBufferDeTexturas(gl, texture, 2* verticesDeObjeto/3, 1, mode);
             }
         }  
-    }
-    
-    
-    public static void dibujarObjeto(GL4 gl, Objeto objeto, int mode) {  
-        gl.glBindVertexArray(objeto.getVaoID());
-        gl.glEnableVertexAttribArray(0);
-        gl.glDrawArrays(mode, 0, objeto.getVertexCount());
-        gl.glDisableVertexAttribArray(0);
-        gl.glBindVertexArray(0);
-    }
-    
+    }  
 }

@@ -111,18 +111,23 @@ public class Muro extends Objeto{
         };
         
         float[] uvs = {
-            t1v1.x(), t1v1.y(), 			t1v2.x(), t1v2.y(), 	 		t1v3.x(), t1v3.y(), 	
-            t2v1.x(), t2v1.y(), 			t2v2.x(), t2v2.y(),                     t2v3.x(), t2v3.y(), 
-            t3v1.x(), t3v1.y(), 			t3v2.x(), t3v2.y(), 	 		t3v3.x(), t3v3.y(), 
-            t4v1.x(), t4v1.y(), 			t4v2.x(), t4v2.y(), 	 		t4v3.x(), t4v3.y(), 
-            t5v1.x(), t5v1.y(), 			t5v2.x(), t5v2.y(), 	 		t5v3.x(), t5v3.y(), 
-            t6v1.x(), t6v1.y(), 			t6v2.x(), t6v2.y(), 	 		t6v3.x(), t6v3.y(), 
-            t7v1.x(), t7v1.y(), 			t7v2.x(), t7v2.y(), 	 		t7v3.x(), t7v3.y(), 	
-            t8v1.x(), t8v1.y(), 			t8v2.x(), t8v2.y(), 	 		t8v3.x(), t8v3.y(), 
-            t9v1.x(), t9v1.y(), 			t9v2.x(), t9v2.y(), 	 		t9v3.x(), t9v3.y(), 	
-            t10v1.x(), t10v1.y(),                       t10v2.x(), t10v2.y(),	 		t10v3.x(), t10v3.y(), 
-            t11v1.x(), t11v1.y(), 			t11v2.x(), t11v2.y(), 	 		t11v3.x(), t11v3.y(), 	
-            t12v1.x(), t12v1.y(), 			t12v2.x(), t12v2.y(), 	 		t12v3.x(), t12v3.y()
+            0.0f, 0.0f, 			1.0f, 1.0f, 	 		0.0f, 1.0f, 	
+            0.0f, 0.0f, 			1.0f, 0.0f,                     1.0f, 1.0f, 
+            
+            0.0f, 0.0f, 			1.0f, 1.0f, 	 		0.0f, 1.0f, 	
+            0.0f, 0.0f, 			1.0f, 0.0f,                     1.0f, 1.0f, 
+            
+            0.0f, 0.0f, 			1.0f, 1.0f, 	 		0.0f, 1.0f, 	
+            0.0f, 0.0f, 			1.0f, 0.0f,                     1.0f, 1.0f, 
+            
+            0.0f, 0.0f, 			1.0f, 1.0f, 	 		0.0f, 1.0f, 	
+            0.0f, 0.0f, 			1.0f, 0.0f,                     1.0f, 1.0f, 
+            
+            0.0f, 0.0f, 			1.0f, 1.0f, 	 		0.0f, 1.0f, 	
+            0.0f, 0.0f, 			1.0f, 0.0f,                     1.0f, 1.0f, 
+            
+            0.0f, 0.0f, 			1.0f, 1.0f, 	 		0.0f, 1.0f, 	
+            0.0f, 0.0f, 			1.0f, 0.0f,                     1.0f, 1.0f
         };
         
         for(int i = 0; i < vertices.length; i++){

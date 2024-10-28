@@ -2,6 +2,7 @@ package rendering;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.joml.Matrix4f;
 
 public abstract class Objeto {
     
@@ -11,6 +12,8 @@ public abstract class Objeto {
     
     private int vaoID;
     private int vertexCount;
+    
+    public Matrix4f mMat = new Matrix4f();
     
     public int getVaoID() {
         return vaoID;

@@ -124,8 +124,10 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
         
         
         // 020. Se renderizan los objetos en la escena.
-        Controlador.dibujar("v",gl, vbo, 0, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
-        Controlador.dibujar("v",gl, vbo, 2, 3, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
+        Controlador.dibujar(gl, vbo, 0, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES,
+                vMat, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
+        Controlador.dibujar(gl, vbo, 2, 3, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES,
+                vMat, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
        // Controlador.dibujar("v",gl, vbo, 3, brickTexture, ControladorDeLineas.lineas, 2, GL_LINES); 
         
        // Controlador.dibujar("t",gl, vbo, 2, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);

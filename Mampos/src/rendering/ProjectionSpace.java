@@ -34,7 +34,6 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
 	private int vbo[] = new int[5];
 	
 	private	float cameraX, cameraY, cameraZ;
-	private	float cubeLocX, cubeLocY, cubeLocZ;
 	
 	// allocate variables used in display() function, so that they won’t need to be allocated during rendering
 	private FloatBuffer vals = Buffers.newDirectFloatBuffer(16);  // utility buffer for transferring matrices
@@ -79,21 +78,18 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
         
        	aspect	= (float) myCanvas2.getWidth()/(float)myCanvas2.getHeight();
        	pMat.setPerspective((float) Math.toRadians(60.0f), aspect, 0.1f, 1000.0f);
-        gl.glUniformMatrix4fv(pLoc, 1, false, pMat.get(vals));
-        gl.glUniform1i(oLoc, 0);
-     
-      	mvMat.identity();
-      	mvMat.mul(viewMatrix);
-      	mvMat.mul(mMat);
-        gl.glUniformMatrix4fv(mvLoc, 1, false, mvMat.get(vals));
         
-        Controlador.dibujar("v",gl, vbo, 2, 3, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES);
-        Controlador.dibujar("v",gl, vbo, 0, 1, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES);
+        Controlador.dibujar(gl, vbo, 0, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES,
+                viewMatrix, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
+
+        Controlador.dibujar(gl, vbo, 2, 3, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES,
+                viewMatrix, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
         //ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
     }
     
     public void init(GLAutoDrawable drawable){
         GL4 gl = (GL4) GLContext.getCurrentGL();
+        
     	renderingProgram = mampos.Utils.createShaderProgram("shaders/projectionVertShader.glsl", "shaders/projectionFragShader.glsl");
         brickTexture = mampos.Utils.loadTexture("textures/brick/Poliigon_BrickReclaimedRunning_7787_BaseColor.jpg");
         checkerBoardTexture = mampos.Utils.loadTexture("textures/ground/GroundWoodChips001_COL_2K.jpg");
@@ -162,19 +158,19 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
   
         if(e.getKeyCode() == KeyEvent.VK_W) {
             System.out.println("moverse hacia adelante en perspectiva");
-            viewMatrix.translateLocal(0.0f, -1.0f, 0.0f);
+            viewMatrix.translateLocal(0.0f, -0.2f, 0.0f);
         }
         if(e.getKeyCode() == KeyEvent.VK_S) {
             System.out.println("moverse hacia atras en perspectiva");
-            viewMatrix.translateLocal(0.0f, 1.0f, 0.0f);
+            viewMatrix.translateLocal(0.0f, 0.2f, 0.0f);
         }
         if(e.getKeyCode() == KeyEvent.VK_D) {
             System.out.println("moverse a la derecha en perspectiva");
-            viewMatrix.translateLocal(-1.0f, 0.0f, 0.0f);
+            viewMatrix.translateLocal(-0.2f, 0.0f, 0.0f);
         }
         if(e.getKeyCode() == KeyEvent.VK_A) {
             System.out.println("moverse a la izquierda en perspectiva");
-            viewMatrix.translateLocal(1.0f, 0.0f, 0.0f);
+            viewMatrix.translateLocal(0.2f, 0.0f, 0.0f);
         }
         
         

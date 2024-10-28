@@ -22,7 +22,7 @@ public class Plane extends Objeto{
     public void setupCoordsPositions(){
         uv.clear();
         float[] vertices = {
-            0.0f, 1.0f,     0.0f, 0.0f,     1.0f, 1.0f,   1.0f, 1.0f,  0.0f, 0.0f,   1.0f, 0.0f
+            0.0f, 1.0f,     1.0f, 1.0f,     0.0f, 0.0f,   1.0f, 1.0f,  0.0f, 0.0f,   1.0f, 0.0f
         };
         for(int i = 0; i < vertices.length; i++){
             uv.add(vertices[i]);
