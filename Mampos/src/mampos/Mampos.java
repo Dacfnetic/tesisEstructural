@@ -9,6 +9,7 @@ import components.Objects;
 import components.Plane;
 import dibujo.Linea;
 import frames.Interfaz;
+import frames.MainFrame;
 import java.awt.EventQueue;
 import units.Longitud;
 

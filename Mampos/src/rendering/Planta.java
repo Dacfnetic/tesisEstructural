@@ -65,7 +65,7 @@ public class Planta implements GLEventListener, MouseListener, KeyListener, Mous
     public void init(GLAutoDrawable drawable){
         GL4 gl = (GL4) GLContext.getCurrentGL();
         // 001. Se crea el programa en la GPU donde se procesará todo lo referente a este canvas.
-        renderingProgram = mampos.Utils.createShaderProgram("shaders/projectionVertShader.glsl", "shaders/projectionFragShader.glsl");
+        renderingProgram = mampos.Utils.createShaderProgram("src/shaders/vertexShader.glsl", "src/shaders/fragmentShader.glsl");
         // 002. Se cargan las texturas que se utilizarán.
         //TODO: crear funcion para cargar texturas
     	brickTexture = mampos.Utils.loadTexture("textures/brick/Poliigon_BrickReclaimedRunning_7787_BaseColor.jpg");

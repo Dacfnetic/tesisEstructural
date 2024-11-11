@@ -51,7 +51,8 @@ public abstract class Controlador {
     
     public static void prepararBufferDeVertices(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
         // 000. Se selecciona la textura activa.
-     
+     gl.glActiveTexture(GL_TEXTURE0);
+        gl.glBindTexture(GL_TEXTURE_2D, texture);
         // 000. Se le dice que cuente cada 3 datos en el buffer x, y, z.
       	gl.glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
        
@@ -84,6 +85,9 @@ public abstract class Controlador {
     }
     
     public static void prepararBufferDeTexturas(GL4 gl, int texture, int vertexQuantity, int objectsQuantity, int mode){
+        
+        gl.glActiveTexture(GL_TEXTURE0);
+        gl.glBindTexture(GL_TEXTURE_2D, texture);
         
         // 000. Se le dice que cuente cada 3 datos en el buffer x, y, z.
       	gl.glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);

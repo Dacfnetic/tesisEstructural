@@ -32,6 +32,7 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
 	private int renderingProgram;
 	private int vao[] = new int[1];
 	private int vbo[] = new int[5];
+      
 	
 	private	float cameraX, cameraY, cameraZ;
 	
@@ -79,18 +80,20 @@ public class ProjectionSpace implements GLEventListener, MouseListener, KeyListe
        	aspect	= (float) myCanvas2.getWidth()/(float)myCanvas2.getHeight();
        	pMat.setPerspective((float) Math.toRadians(60.0f), aspect, 0.1f, 1000.0f);
         
+        Controlador.dibujar(gl, vbo, 3, 4, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES,
+                viewMatrix, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
+        
         Controlador.dibujar(gl, vbo, 0, 1, checkerBoardTexture, ControladorDePlanos.planos, 6, GL_TRIANGLES,
                 viewMatrix, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
 
-        Controlador.dibujar(gl, vbo, 2, 3, brickTexture, ControladorDeMuros.muros, 36, GL_TRIANGLES,
-                viewMatrix, mvMat, mvLoc, pLoc,oLoc,pMat,vals);
+        
         //ControladorDeCotas.dibujarCotas(gl, vbo, checkerBoardTexture, oLoc);
     }
     
     public void init(GLAutoDrawable drawable){
         GL4 gl = (GL4) GLContext.getCurrentGL();
         
-    	renderingProgram = mampos.Utils.createShaderProgram("shaders/projectionVertShader.glsl", "shaders/projectionFragShader.glsl");
+    	renderingProgram = mampos.Utils.createShaderProgram("src/shaders/vertexShader.glsl", "src/shaders/fragmentShader.glsl");
         brickTexture = mampos.Utils.loadTexture("textures/brick/Poliigon_BrickReclaimedRunning_7787_BaseColor.jpg");
         checkerBoardTexture = mampos.Utils.loadTexture("textures/ground/GroundWoodChips001_COL_2K.jpg");
         

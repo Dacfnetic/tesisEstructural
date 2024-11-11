@@ -1,12 +1,13 @@
-#version 400 core
-
-in vec3 position;
-
-out vec3 colour;
+#version 430
+layout (location=0) in vec3 position;
+layout (location=1) in vec2 texCoord;
+layout (binding=0) uniform sampler2D samp;
+uniform mat4 mv_matrix;
+uniform mat4 p_matrix;
+uniform float tf;
+out vec2 tc;
 
 void main(void){
-
-    gl_Position = vec4(position, 1.0);
-    colour = vec3(position.x + 0.5, 1.0, position.y + 0.5);
-
+    gl_Position = p_matrix * mv_matrix * vec4(position, 1.0);
+    tc = texCoord;
 }

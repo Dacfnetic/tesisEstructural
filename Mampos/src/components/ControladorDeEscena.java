@@ -83,6 +83,23 @@ public abstract class ControladorDeEscena extends Controlador{
         worldY = (screenYCoordinates * perUnitY) + (planta.cameraCurrentY); 
     }
     
+    public static void subirNivel(){
+        int indexOfCurrentStory = components.Objects.stories.indexOf(components.Objects.currentStory);
+        if(indexOfCurrentStory == 0){
+            components.Objects.currentStory = components.Objects.stories.get(components.Objects.stories.size() - 1);
+        } else {
+            components.Objects.currentStory = components.Objects.stories.get(indexOfCurrentStory - 1);
+        }
+    }
+    public  static void bajarNivel(){
+        int indexOfCurrentStory = components.Objects.stories.indexOf(components.Objects.currentStory);
+        if(indexOfCurrentStory == components.Objects.stories.size() - 1){
+            components.Objects.currentStory = components.Objects.stories.get(0);
+        } else {
+            components.Objects.currentStory = components.Objects.stories.get(indexOfCurrentStory + 1);
+        }
+    }
+    
     public static void controlesEnPlanta(Planta planta, KeyEvent e){
         Matrix4f vMat = planta.vMat;
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
@@ -90,6 +107,10 @@ public abstract class ControladorDeEscena extends Controlador{
             usandoHerramientaMuro.setEstado(false);
         }
         if(e.getKeyCode() == KeyEvent.VK_O) isOrtho = !isOrtho;
+        if(e.getKeyCode() == KeyEvent.VK_N) mampos.Command.openStoryEditor();
+        if(e.getKeyCode() == KeyEvent.VK_UP) subirNivel();
+        if(e.getKeyCode() == KeyEvent.VK_DOWN) bajarNivel();
+        
         if(e.getKeyCode() == KeyEvent.VK_E) isExterior = !isExterior;
         if(e.getKeyCode() == KeyEvent.VK_F) isFlipped = !isFlipped;
         if(e.getKeyCode() == KeyEvent.VK_C) isChain = !isChain;
